@@ -1,0 +1,354 @@
+@import 'tailwindcss';
+
+/*
+ * Design tokens.
+ * Neutrals and the espresso accent are sampled from the Snug & Co. logo
+ * (bone background, olive-grey letters, espresso ampersand, taupe hanger).
+ * Black and white carry type, buttons and the footer (PRD §23).
+ */
+@theme {
+  --font-sans: 'Archivo', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --color-ink: #000000;
+  --color-paper: #ffffff;
+  --color-bone: #f0ede4;
+  --color-bone-deep: #e6e1d5;
+  --color-espresso: #574741;
+  --color-stone: #5f5c52;
+  --color-taupe: #9c9289;
+  --color-line: #e2ddd2;
+  --color-alert: #7a2e24;
+
+  --breakpoint-wide: 90rem;
+
+  --ease-soft: cubic-bezier(0.22, 0.7, 0.2, 1);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+    overflow-x: clip;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-espresso);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: var(--color-espresso);
+    color: var(--color-paper);
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  dialog::backdrop {
+    background: rgb(0 0 0 / 0.35);
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+}
+
+/* Page gutter: 16px on phones, widening to editorial margins. Usable with variants (lg:shell). */
+@utility shell {
+  width: 100%;
+  max-width: 90rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+  @variant sm {
+    padding-inline: 1.5rem;
+  }
+  @variant lg {
+    padding-inline: 2.5rem;
+  }
+}
+
+/* Shell gutter below desktop only, for children of an lg:shell parent. */
+@utility gutter {
+  padding-inline: 1rem;
+  @variant sm {
+    padding-inline: 1.5rem;
+  }
+  @variant lg {
+    padding-inline: 0;
+  }
+}
+
+@layer components {
+  /* Archivo's width axis gives headings a wider, fashion-label stance. */
+  .type-display {
+    font-stretch: 116%;
+    font-weight: 500;
+    font-size: clamp(2.6rem, 1.4rem + 5.6vw, 6.75rem);
+    line-height: 0.94;
+    letter-spacing: -0.035em;
+  }
+
+  .type-h1 {
+    font-stretch: 112%;
+    font-weight: 500;
+    font-size: clamp(2rem, 1.5rem + 2.4vw, 3.5rem);
+    line-height: 1;
+    letter-spacing: -0.025em;
+  }
+
+  .type-h2 {
+    font-stretch: 112%;
+    font-weight: 500;
+    font-size: clamp(1.625rem, 1.3rem + 1.5vw, 2.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  .type-h3 {
+    font-stretch: 108%;
+    font-weight: 500;
+    font-size: 1.25rem;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .type-small {
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  /* The heavy espresso ampersand from the logo. */
+  .amp {
+    color: var(--color-espresso);
+    font-weight: 800;
+    font-stretch: 100%;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    min-height: 3rem;
+    padding-inline: 1.5rem;
+    border-radius: 2px;
+    border: 1px solid var(--color-ink);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    line-height: 1.2;
+    text-align: center;
+    transition:
+      background-color 180ms var(--ease-soft),
+      color 180ms var(--ease-soft),
+      border-color 180ms var(--ease-soft);
+    touch-action: manipulation;
+  }
+  .btn-primary {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+  .btn-primary:hover {
+    background: var(--color-espresso);
+    border-color: var(--color-espresso);
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--color-ink);
+  }
+  .btn-secondary:hover {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+  .btn-inverse {
+    background: var(--color-paper);
+    border-color: var(--color-paper);
+    color: var(--color-ink);
+  }
+  .btn-inverse:hover {
+    background: var(--color-bone);
+    border-color: var(--color-bone);
+  }
+  .btn:disabled,
+  .btn[aria-disabled='true'] {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  /* Understated text link with an underline that tightens on hover. */
+  .link {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.3em;
+    text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+    transition:
+      text-decoration-color 180ms var(--ease-soft),
+      text-underline-offset 180ms var(--ease-soft);
+  }
+  .link:hover {
+    text-decoration-color: currentColor;
+    text-underline-offset: 0.2em;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.5rem;
+    padding-inline: 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-line);
+    font-size: 0.875rem;
+    white-space: nowrap;
+    transition:
+      background-color 160ms var(--ease-soft),
+      border-color 160ms var(--ease-soft),
+      color 160ms var(--ease-soft);
+  }
+  .chip:hover {
+    border-color: var(--color-ink);
+  }
+  .chip[aria-current='page'],
+  .chip[aria-pressed='true'] {
+    background: var(--color-ink);
+    border-color: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Drawer and sheet dialogs. */
+  .drawer {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    max-width: none;
+    max-height: none;
+    background: var(--color-paper);
+    color: var(--color-ink);
+  }
+  .drawer[open] {
+    animation: drawer-in 260ms var(--ease-soft);
+  }
+  .drawer-left {
+    inset: 0 auto 0 0;
+    width: min(26rem, 88vw);
+    height: 100dvh;
+  }
+  .drawer-left[open] {
+    animation-name: drawer-in-left;
+  }
+  .drawer-bottom {
+    inset: auto 0 0 0;
+    width: 100%;
+    max-height: 88dvh;
+    border-radius: 12px 12px 0 0;
+  }
+  .drawer-bottom[open] {
+    animation-name: drawer-in-bottom;
+  }
+  .drawer-top {
+    inset: 0 0 auto 0;
+    width: 100%;
+    max-height: 100dvh;
+  }
+  .drawer-top[open] {
+    animation-name: drawer-in-top;
+  }
+}
+
+/* Skeleton shimmer for restrained loading states. */
+@keyframes shimmer {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+.skeleton {
+  background: linear-gradient(90deg, var(--color-bone) 0%, var(--color-bone-deep) 50%, var(--color-bone) 100%);
+  background-size: 300% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes drawer-in-left {
+  from {
+    transform: translateX(-100%);
+  }
+}
+@keyframes drawer-in-bottom {
+  from {
+    transform: translateY(100%);
+  }
+}
+@keyframes drawer-in-top {
+  from {
+    transform: translateY(-1.5rem);
+    opacity: 0;
+  }
+}
+
+/* The single orchestrated moment: the hero photograph unveils, then the tagline settles. */
+@keyframes unveil {
+  from {
+    clip-path: inset(100% 0 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.6em);
+  }
+}
+.hero-unveil {
+  animation: unveil 1100ms var(--ease-soft) both;
+}
+.hero-rise {
+  animation: rise 800ms var(--ease-soft) both;
+  animation-delay: calc(450ms + var(--i, 0) * 110ms);
+}
+
+/* Product image: gentle zoom and second-image crossfade on devices that hover. */
+@media (hover: hover) and (pointer: fine) {
+  .card-media img {
+    transition:
+      transform 900ms var(--ease-soft),
+      opacity 500ms var(--ease-soft);
+  }
+  .card-media:hover img.primary {
+    transform: scale(1.025);
+  }
+  .card-media:hover img.secondary {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

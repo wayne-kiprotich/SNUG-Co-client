@@ -1,0 +1,69 @@
+import { Link } from 'react-router-dom'
+import { AVAILABILITY_LABEL, BADGE_LABEL, formatPrice } from '../lib/format'
+import { Img } from './Img'
+import { getImage, srcSetFor } from '../lib/images'
+
+const CARD_SIZES = '(min-width: 1024px) 23vw, (min-width: 768px) 31vw, 48vw'
+
+function badgeFor(product) {
+  if (product.availability === 'sold-out') return BADGE_LABEL['sold-out']
+  return product.badge ? BADGE_LABEL[product.badge] : null
+}
+
+export function ProductCard({ product, sizes = CARD_SIZES, priority = false }) {
+  const [primary, secondary] = product.images
+  const secondaryImage = getImage(secondary?.id)
+  const badge = badgeFor(product)
+  const soldOut = product.availability === 'sold-out'
+  const showAvailability = product.availability !== 'available' && !soldOut
+
+  return (
+    <article className="group relative">
+      <Link to={`/product/${product.slug}`} className="block">
+        <div className="card-media relative">
+          <Img
+            id={primary?.id}
+            alt={primary?.alt ?? product.name}
+            sizes={sizes}
+            priority={priority}
+            imgClassName={`primary ${soldOut ? 'opacity-60' : ''}`}
+          />
+          {secondaryImage && (
+            <img
+              src={secondaryImage.url(secondaryImage.widths[0])}
+              srcSet={srcSetFor(secondaryImage)}
+              sizes={sizes}
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+              decoding="async"
+              className="secondary pointer-events-none absolute inset-0 hidden h-full w-full object-cover opacity-0 [@media(hover:hover)_and_(pointer:fine)]:block"
+            />
+          )}
+          {badge && (
+            <span className="absolute left-2.5 top-2.5 rounded-full bg-paper px-2.5 py-1 text-xs font-medium leading-none text-ink">
+              {badge}
+            </span>
+          )}
+        </div>
+        <div className="mt-3 flex flex-col gap-0.5 pr-2">
+          <h3 className="text-[0.9375rem] leading-snug group-hover:underline group-hover:underline-offset-4">
+            {product.name}
+          </h3>
+          <p className={`text-[0.9375rem] ${product.priceKES == null ? 'text-stone' : ''}`}>{formatPrice(product.priceKES)}</p>
+          {showAvailability && <p className="text-[0.8125rem] text-espresso">{AVAILABILITY_LABEL[product.availability]}</p>}
+        </div>
+      </Link>
+    </article>
+  )
+}
+
+export function ProductCardSkeleton() {
+  return (
+    <div aria-hidden="true">
+      <div className="skeleton aspect-[4/5]" />
+      <div className="skeleton mt-3 h-4 w-3/4" />
+      <div className="skeleton mt-2 h-4 w-1/3" />
+    </div>
+  )
+}
