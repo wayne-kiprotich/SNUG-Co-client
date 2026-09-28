@@ -1,0 +1,536 @@
+{
+  "all-white-cosy-set-1": {
+    "height": 1350,
+    "width": 1080,
+    "widths": [
+      480,
+      800,
+      1080
+    ]
+  },
+  "argentina-hoodie-1": {
+    "height": 1286,
+    "width": 1029,
+    "widths": [
+      480,
+      800,
+      1029
+    ]
+  },
+  "argentina-hoodie-2": {
+    "height": 800,
+    "width": 640,
+    "widths": [
+      480,
+      640
+    ]
+  },
+  "argentina-hoodie-3": {
+    "height": 900,
+    "width": 720,
+    "widths": [
+      480,
+      720
+    ]
+  },
+  "argentina-hoodie-4": {
+    "height": 800,
+    "width": 640,
+    "widths": [
+      480,
+      640
+    ]
+  },
+  "argentina-jersey-1": {
+    "height": 900,
+    "width": 720,
+    "widths": [
+      480,
+      720
+    ]
+  },
+  "argentina-jersey-2": {
+    "height": 800,
+    "width": 640,
+    "widths": [
+      480,
+      640
+    ]
+  },
+  "arsenal-champions-hoodie-1": {
+    "height": 900,
+    "width": 720,
+    "widths": [
+      480,
+      720
+    ]
+  },
+  "arsenal-champions-hoodie-2": {
+    "height": 900,
+    "width": 720,
+    "widths": [
+      480,
+      720
+    ]
+  },
+  "arsenal-champions-sweatshirt-1": {
+    "height": 900,
+    "width": 720,
+    "widths": [
+      480,
+      720
+    ]
+  },
+  "arsenal-champions-sweatshirt-2": {
+    "height": 1350,
+    "width": 1080,
+    "widths": [
+      480,
+      800,
+      1080
+    ]
+  },
+  "arsenal-champions-sweatshirt-3": {
+    "height": 800,
+    "width": 640,
+    "widths": [
+      480,
+      640
+    ]
+  },
+  "arsenal-matchday-sweatshirt-1": {
+    "height": 1080,
+    "width": 864,
+    "widths": [
+      480,
+      800,
+      864
+    ]
+  },
+  "arsenal-matchday-sweatshirt-2": {
+    "height": 800,
+    "width": 640,
+    "widths": [
+      480,
+      640
+    ]
+  },
+  "arsenal-matchday-sweatshirt-3": {
+    "height": 1350,
+    "width": 1080,
+    "widths": [
+      480,
+      800,
+      1080
+    ]
+  },
+  "arsenal-retro-jacket-1": {
+    "height": 1350,
+    "width": 1080,
+    "widths": [
+      480,
+      800,
+      1080
+    ]
+  },
+  "arsenal-retro-jacket-2": {
+    "height": 900,
+    "width": 720,
+    "widths": [
+      480,
+      720
+    ]
+  },
+  "arsenal-retro-jacket-3": {
+    "height": 900,
+    "width": 720,
+    "widths": [
+      480,
+      720
+    ]
+  },
+  "arsenal-retro-jacket-4": {
+    "height": 1350,
+    "width": 1080,
+    "widths": [
+      480,
+      800,
+      1080
+    ]
+  },
+  "beige-lounge-set-1": {
+    "height": 1350,
+    "width": 1080,
+    "widths": [
+      480,
+      800,
+      1080
+    ]
+  },
+  "beige-lounge-set-2": {
+    "height": 1350,
+    "width": 1080,
+    "widths": [
+      480,
+      800,
+      1080
+    ]
+  },
+  "beige-lounge-set-3": {
+    "height": 900,
+    "width": 720,
+    "widths": [
+      480,
+      720
+    ]
+  },
+  "black-and-white-set-1": {
+    "height": 1350,
+    "width": 1080,
+    "widths": [
+      480,
+      800,
+      1080
+    ]
+  },
+  "black-and-white-set-2": {
+    "height": 900,
+    "width": 720,
+    "widths": [
+      480,
+      720
+    ]
+  },
+  "black-and-white-set-3": {
+    "height": 900,
+    "width": 720,
+    "widths": [
+      480,
+      720
+    ]
+  },
+  "black-and-white-set-4": {
+    "height": 1350,
+    "width": 1080,
+    "widths": [
+      480,
+      800,
+      1080
+    ]
+  },
+  "blue-sleeveless-set-1": {
+    "height": 900,
+    "width": 720,
+    "widths": [
+      480,
+      720
+    ]
+  },
+  "blue-sleeveless-set-2": {
+    "height": 1350,
+    "width": 1080,
+    "widths": [
+      480,
+      800,
+      1080
+    ]
+  },
+  "club-puff-jacket-1": {
+    "height": 1272,
+    "width": 1018,
+    "widths": [
+      480,
+      800,
+      1018
+    ]
+  },
+  "club-puff-jacket-2": {
+    "height": 800,
+    "width": 640,
+    "widths": [
+      480,
+      640
+    ]
+  },
+  "club-puff-jacket-3": {
+    "height": 800,
+    "width": 640,
+    "widths": [
+      480,
+      640
+    ]
+  },
+  "club-puff-jacket-4": {
+    "height": 900,
+    "width": 720,
+    "widths": [
+      480,
+      720
+    ]
+  },
+  "colour-block-short-set-1": {
+    "height": 1350,
+    "width": 1080,
+    "widths": [
+      480,
+      800,
+      1080
+    ]
+  },
+  "colour-block-short-set-2": {
+    "height": 1350,
+    "width": 1080,
+    "widths": [
+      480,
+      800,
+      1080
+    ]
+  },
+  "colour-block-short-set-3": {
+    "height": 900,
+    "width": 720,
+    "widths": [
+      480,
+      720
+    ]
+  },
+  "editorial-his-hers-1": {
+    "height": 1350,
+    "width": 1080,
+    "widths": [
+      480,
+      800,
+      1080
+    ]
+  },
+  "editorial-pressing-1": {
+    "height": 720,
+    "width": 576,
+    "widths": [
+      480,
+      576
+    ]
+  },
+  "editorial-pressing-2": {
+    "height": 900,
+    "width": 720,
+    "widths": [
+      480,
+      720
+    ]
+  },
+  "editorial-studio-bts": {
+    "height": 1350,
+    "width": 1080,
+    "widths": [
+      480,
+      800,
+      1080
+    ]
+  },
+  "green-tracksuit-1": {
+    "height": 900,
+    "width": 720,
+    "widths": [
+      480,
+      720
+    ]
+  },
+  "green-tracksuit-2": {
+    "height": 1350,
+    "width": 1080,
+    "widths": [
+      480,
+      800,
+      1080
+    ]
+  },
+  "green-tracksuit-3": {
+    "height": 900,
+    "width": 720,
+    "widths": [
+      480,
+      720
+    ]
+  },
+  "kenya-bomber-jacket-1": {
+    "height": 900,
+    "width": 720,
+    "widths": [
+      480,
+      720
+    ]
+  },
+  "kenya-bomber-jacket-2": {
+    "height": 1350,
+    "width": 1080,
+    "widths": [
+      480,
+      800,
+      1080
+    ]
+  },
+  "kenya-bomber-jacket-3": {
+    "height": 800,
+    "width": 640,
+    "widths": [
+      480,
+      640
+    ]
+  },
+  "kenya-cosy-jersey-1": {
+    "height": 1350,
+    "width": 1080,
+    "widths": [
+      480,
+      800,
+      1080
+    ]
+  },
+  "kenya-cosy-jersey-2": {
+    "height": 900,
+    "width": 720,
+    "widths": [
+      480,
+      720
+    ]
+  },
+  "kenya-cosy-jersey-3": {
+    "height": 900,
+    "width": 720,
+    "widths": [
+      480,
+      720
+    ]
+  },
+  "kenya-cosy-jersey-4": {
+    "height": 900,
+    "width": 720,
+    "widths": [
+      480,
+      720
+    ]
+  },
+  "manchester-united-retro-jacket-1": {
+    "height": 900,
+    "width": 720,
+    "widths": [
+      480,
+      720
+    ]
+  },
+  "manchester-united-retro-jacket-2": {
+    "height": 800,
+    "width": 640,
+    "widths": [
+      480,
+      640
+    ]
+  },
+  "off-shoulder-jogger-set-1": {
+    "height": 900,
+    "width": 720,
+    "widths": [
+      480,
+      720
+    ]
+  },
+  "pastel-green-set-1": {
+    "height": 900,
+    "width": 720,
+    "widths": [
+      480,
+      720
+    ]
+  },
+  "pastel-green-set-2": {
+    "height": 900,
+    "width": 720,
+    "widths": [
+      480,
+      720
+    ]
+  },
+  "pastel-green-set-3": {
+    "height": 800,
+    "width": 640,
+    "widths": [
+      480,
+      640
+    ]
+  },
+  "snug-and-go-grey-set-1": {
+    "height": 800,
+    "width": 640,
+    "widths": [
+      480,
+      640
+    ]
+  },
+  "striped-short-set-1": {
+    "height": 900,
+    "width": 720,
+    "widths": [
+      480,
+      720
+    ]
+  },
+  "striped-short-set-2": {
+    "height": 1350,
+    "width": 1080,
+    "widths": [
+      480,
+      800,
+      1080
+    ]
+  },
+  "the-black-tracksuit-1": {
+    "height": 1350,
+    "width": 1080,
+    "widths": [
+      480,
+      800,
+      1080
+    ]
+  },
+  "the-black-tracksuit-2": {
+    "height": 900,
+    "width": 720,
+    "widths": [
+      480,
+      720
+    ]
+  },
+  "the-black-tracksuit-3": {
+    "height": 900,
+    "width": 720,
+    "widths": [
+      480,
+      720
+    ]
+  },
+  "tropical-vibes-short-set-1": {
+    "height": 900,
+    "width": 720,
+    "widths": [
+      480,
+      720
+    ]
+  },
+  "zebra-print-set-1": {
+    "height": 800,
+    "width": 640,
+    "widths": [
+      480,
+      640
+    ]
+  },
+  "zebra-print-set-2": {
+    "height": 800,
+    "width": 640,
+    "widths": [
+      480,
+      640
+    ]
+  }
+}
