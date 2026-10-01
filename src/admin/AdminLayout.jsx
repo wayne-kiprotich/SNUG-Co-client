@@ -37,7 +37,7 @@ export function Component() {
     let active = true
     api
       .me()
-      .then((me) => active && setAdmin(me))
+      .then((me) => active && (me?.email ? setAdmin(me) : goToLogin()))
       .catch(() => active && goToLogin())
     return () => {
       active = false

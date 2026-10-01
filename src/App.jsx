@@ -17,9 +17,13 @@ const deferred = (Page) => (
   </Suspense>
 )
 
+// Shown while a lazily loaded route's code downloads on the first page load.
+const booting = <div className="min-h-svh" />
+
 const adminRoutes = {
   path: '/admin',
   errorElement: <RouteError />,
+  hydrateFallbackElement: booting,
   lazy: () => import('./admin/AdminLayout'),
   children: [
     { index: true, lazy: () => import('./admin/Products') },
@@ -33,7 +37,7 @@ const adminRoutes = {
 }
 
 const router = createBrowserRouter([
-  { path: '/admin/login', errorElement: <RouteError />, lazy: () => import('./admin/Login') },
+  { path: '/admin/login', errorElement: <RouteError />, hydrateFallbackElement: booting, lazy: () => import('./admin/Login') },
   adminRoutes,
   {
     element: <Layout />,

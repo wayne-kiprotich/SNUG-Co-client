@@ -16,7 +16,7 @@ export function Component() {
 
   useEffect(() => {
     document.title = 'Sign in | Snug & Co. admin'
-    api.me().then(() => navigate('/admin', { replace: true })).catch(() => {})
+    api.me().then((me) => me?.email && navigate('/admin', { replace: true })).catch(() => {})
   }, [navigate])
 
   const submit = async (event) => {

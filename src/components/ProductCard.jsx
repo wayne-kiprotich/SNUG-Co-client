@@ -26,7 +26,8 @@ export function ProductCard({ product, sizes = CARD_SIZES, priority = false }) {
             alt={primary?.alt ?? product.name}
             sizes={sizes}
             priority={priority}
-            imgClassName={`primary ${soldOut ? 'opacity-60' : ''}`}
+            className={soldOut ? 'opacity-60' : ''}
+            imgClassName="primary"
           />
           {secondaryImage && (
             <img
