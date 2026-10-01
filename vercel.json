@@ -1,3 +1,7 @@
 {
-  "rewrites": [{ "source": "/((?!images/|assets/|.*\\..*).*)", "destination": "/index.html" }]
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "https://snuggunicorn-wsgi-appco.onrender.com/api/:path*" },
+    { "source": "/uploads/:path*", "destination": "https://snuggunicorn-wsgi-appco.onrender.com/uploads/:path*" },
+    { "source": "/((?!api/|uploads/|images/|assets/|.*\\..*).*)", "destination": "/index.html" }
+  ]
 }
