@@ -1,10 +1,3 @@
-/**
- * Provider-agnostic analytics (PRD §47–48).
- *
- * Events are pushed to window.dataLayer (Google Tag Manager / GA4 compatible)
- * and dispatched as a DOM event so Cloudflare, Vercel or any other provider
- * can subscribe without touching components. No provider is installed yet.
- */
 export const EVENTS = {
   productViewed: 'product_viewed',
   categoryViewed: 'category_viewed',

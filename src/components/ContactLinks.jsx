@@ -10,7 +10,6 @@ function External({ href, children, onClick, ...props }) {
   )
 }
 
-/** General enquiry. Never implies a product was selected (PRD §18). */
 export function WhatsAppLink({ children, placement, ...props }) {
   return (
     <External

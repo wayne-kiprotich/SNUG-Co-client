@@ -4,7 +4,6 @@ import { AnnouncementBar } from './AnnouncementBar'
 import { Footer } from './Footer'
 import { Header } from './Header'
 
-/** Scrolls to in-page anchors such as /#collections after navigation. */
 function HashScroller() {
   const { hash, pathname } = useLocation()
   useEffect(() => {
@@ -30,7 +29,6 @@ export function Layout() {
         <Outlet />
       </main>
       <Footer />
-      {/* Fresh page loads all share the key "default", so key those by path instead. */}
       <ScrollRestoration getKey={(loc) => (loc.key === 'default' ? loc.pathname + loc.search : loc.key)} />
       <HashScroller />
     </>

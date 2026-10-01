@@ -2,10 +2,6 @@ import { testimonials } from '../../data/social'
 import { InstagramLink } from '../ContactLinks'
 import { InstagramIcon } from '../Icons'
 
-/**
- * Customer feedback. Renders only testimonials SNUG has approved for publication.
- * Until then it points to the real "Feedback" highlight on Instagram instead of inventing quotes.
- */
 export function Testimonials() {
   const approved = testimonials.filter((t) => t.approved)
 

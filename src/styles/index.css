@@ -1,15 +1,10 @@
 @import 'tailwindcss';
 
-/*
- * Design tokens.
- * Neutrals and the espresso accent are sampled from the Snug & Co. logo
- * (bone background, olive-grey letters, espresso ampersand, taupe hanger).
- * Black and white carry type, buttons and the footer (PRD §23).
- */
+/* Light theme tokens. Dark overrides below. */
 @theme {
   --font-sans: 'Archivo', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
 
-  --color-ink: #000000;
+  --color-ink: #2b2c2e;
   --color-paper: #ffffff;
   --color-bone: #f0ede4;
   --color-bone-deep: #e6e1d5;
@@ -18,10 +13,34 @@
   --color-taupe: #9c9289;
   --color-line: #e2ddd2;
   --color-alert: #7a2e24;
+  --color-bar: #2b2c2e;
+  --color-on-bar: #ffffff;
 
   --breakpoint-wide: 90rem;
 
   --ease-soft: cubic-bezier(0.22, 0.7, 0.2, 1);
+}
+
+/* Dark mode: dark grey page, soft white text. Set by the header toggle via data-theme. */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --color-ink: #f1efea;
+  --color-paper: #232425;
+  --color-bone: #2c2d2f;
+  --color-bone-deep: #37383a;
+  --color-espresso: #c8b6a8;
+  --color-stone: #a9a8a3;
+  --color-taupe: #8b8882;
+  --color-line: #3d3e40;
+  --color-alert: #e8877a;
+  --color-bar: #161718;
+  --color-on-bar: #f1efea;
+}
+:root[data-theme='dark'] dialog::backdrop {
+  background: rgb(0 0 0 / 0.6);
+}
+:root[data-theme='dark'] .btn-primary:hover {
+  color: #161718;
 }
 
 @layer base {
@@ -63,8 +82,6 @@
     display: none;
   }
 }
-
-/* Page gutter: 16px on phones, widening to editorial margins. Usable with variants (lg:shell). */
 @utility shell {
   width: 100%;
   max-width: 90rem;
@@ -77,8 +94,6 @@
     padding-inline: 2.5rem;
   }
 }
-
-/* Shell gutter below desktop only, for children of an lg:shell parent. */
 @utility gutter {
   padding-inline: 1rem;
   @variant sm {
@@ -90,7 +105,6 @@
 }
 
 @layer components {
-  /* Archivo's width axis gives headings a wider, fashion-label stance. */
   .type-display {
     font-stretch: 116%;
     font-weight: 500;
@@ -127,8 +141,6 @@
     font-size: 0.875rem;
     line-height: 1.5;
   }
-
-  /* The heavy espresso ampersand from the logo. */
   .amp {
     color: var(--color-espresso);
     font-weight: 800;
@@ -184,8 +196,6 @@
     opacity: 0.45;
     cursor: not-allowed;
   }
-
-  /* Understated text link with an underline that tightens on hover. */
   .link {
     text-decoration: underline;
     text-decoration-thickness: 1px;
@@ -230,8 +240,6 @@
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
-
-  /* Drawer and sheet dialogs. */
   .drawer {
     margin: 0;
     padding: 0;
@@ -270,8 +278,6 @@
     animation-name: drawer-in-top;
   }
 }
-
-/* Skeleton shimmer for restrained loading states. */
 @keyframes shimmer {
   from {
     background-position: 100% 0;
@@ -302,8 +308,6 @@
     opacity: 0;
   }
 }
-
-/* The single orchestrated moment: the hero photograph unveils, then the tagline settles. */
 @keyframes unveil {
   from {
     clip-path: inset(100% 0 0 0);
@@ -325,8 +329,6 @@
   animation: rise 800ms var(--ease-soft) both;
   animation-delay: calc(450ms + var(--i, 0) * 110ms);
 }
-
-/* Product image: gentle zoom and second-image crossfade on devices that hover. */
 @media (hover: hover) and (pointer: fine) {
   .card-media img {
     transition:

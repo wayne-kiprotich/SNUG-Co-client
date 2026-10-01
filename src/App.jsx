@@ -7,7 +7,6 @@ import Product from './pages/Product'
 import RouteError from './pages/RouteError'
 import Shop from './pages/Shop'
 
-// Lower-traffic pages load on demand to keep the first download small.
 const About = lazy(() => import('./pages/About'))
 const Contact = lazy(() => import('./pages/Contact'))
 const Orders = lazy(() => import('./pages/Orders'))
@@ -18,7 +17,6 @@ const deferred = (Page) => (
   </Suspense>
 )
 
-// The admin is a separate area: no storefront header or footer, loaded only when visited.
 const adminRoutes = {
   path: '/admin',
   errorElement: <RouteError />,
@@ -29,6 +27,7 @@ const adminRoutes = {
     { path: 'products/:id', lazy: () => import('./admin/ProductForm') },
     { path: 'categories', lazy: () => import('./admin/Taxonomy').then((m) => ({ Component: m.Categories })) },
     { path: 'collections', lazy: () => import('./admin/Taxonomy').then((m) => ({ Component: m.Collections })) },
+    { path: 'settings', lazy: () => import('./admin/Settings') },
     { path: 'account', lazy: () => import('./admin/Account') },
   ],
 }

@@ -3,7 +3,6 @@ import { EVENTS, track } from '../../lib/analytics'
 import { Img } from '../Img'
 import { SectionHeading } from '../SectionHeading'
 
-/** Large image-led category tiles. Alternate tiles drop lower on desktop to break the grid. */
 export function CategoryShowcase({ catalog }) {
   const counts = catalog.products.reduce((acc, p) => ({ ...acc, [p.category]: (acc[p.category] || 0) + 1 }), {})
   const tiles = catalog.categories.filter((c) => counts[c.slug])

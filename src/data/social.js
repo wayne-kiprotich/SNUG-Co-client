@@ -1,7 +1,3 @@
-/**
- * Curated Instagram gallery (static for MVP, no live API — PRD §10.11).
- * Each tile links to the original post on @snug_co_ke.
- */
 export const instagramGallery = [
   { image: 'the-black-tracksuit-1', alt: 'The Black Tracksuit product shot', href: 'https://www.instagram.com/p/DdPORkEOSbV/' },
   { image: 'colour-block-short-set-1', alt: 'Brown and cream short set', href: 'https://www.instagram.com/p/DaQlJbNKGAN/' },

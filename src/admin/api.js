@@ -1,7 +1,5 @@
 import { registerImages } from '../lib/images'
 
-// The admin talks to the Flask API on the same domain (recommended), so the session
-// cookie is sent automatically and no cross-origin rules are needed.
 const BASE = (import.meta.env.VITE_API_URL || '/api').replace(/\/$/, '')
 
 export class ApiError extends Error {
@@ -15,7 +13,6 @@ export class ApiError extends Error {
 async function request(path, { method = 'GET', json, form } = {}) {
   const headers = { Accept: 'application/json' }
   let body
-  // Marks the call as coming from this page. The server rejects state changes without it.
   if (method !== 'GET') headers['X-Requested-With'] = 'snug-admin'
   if (json !== undefined) {
     headers['Content-Type'] = 'application/json'
@@ -36,7 +33,6 @@ async function request(path, { method = 'GET', json, form } = {}) {
     }
     throw new ApiError(res.status, data?.error || 'Something went wrong. Try again.', data?.fields)
   }
-  // Uploaded photos come back with their sizes so they can be shown straight away.
   if (data?.images && !Array.isArray(data.images)) registerImages(data.images)
   if (data?.registry) registerImages(data.registry)
   return data
@@ -66,6 +62,9 @@ export const api = {
   orderImages: (id, ids) => request(`/admin/products/${id}/images/order`, { method: 'POST', json: { ids } }),
   deleteImage: (id, imageId) => request(`/admin/products/${id}/images/${imageId}`, { method: 'DELETE' }),
   allImages: () => request('/admin/images'),
+
+  settings: () => request('/admin/settings'),
+  updateSettings: (json) => request('/admin/settings', { method: 'PATCH', json }),
 
   taxonomy: (kind) => request(`/admin/${kind}`),
   createTaxonomy: (kind, json) => request(`/admin/${kind}`, { method: 'POST', json }),

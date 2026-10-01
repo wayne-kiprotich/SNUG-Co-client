@@ -35,7 +35,6 @@ function productJsonLd(product, category) {
     category: category?.name,
   }
   if (product.material) data.material = product.material
-  // Offers only when a real price is published. Availability only when SNUG has set a non-default state.
   if (product.priceKES != null) {
     data.offers = {
       '@type': 'Offer',
@@ -147,7 +146,6 @@ export default function Product() {
           </div>
         </section>
       )}
-      {/* Room for the sticky order bar on phones */}
       <div className="h-20 lg:hidden" aria-hidden="true" />
     </>
   )

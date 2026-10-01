@@ -25,15 +25,14 @@ export const site = {
   shortName: 'Snug & Co',
   tagline: 'Minimal, Luxurious & Effortlessly you.',
   statement: 'Where comfort meets elevated living.',
-  // Instagram bio, lightly edited for punctuation.
+  seoTitle: 'Loungewear, Tracksuits & Matchday Wear in Nairobi, Kenya',
+  seoDescription:
+    'Shop Snug & Co., a Nairobi clothing brand: lounge sets, tracksuits, hoodies, jackets and matchday wear. Comfortable, minimal fashion in Kenya. Order on WhatsApp.',
   bio: 'Where comfort meets elevated living. Our carefully curated pieces wrap you in softness and warmth.',
-  // "EST. 2023" appears on SNUG's own product graphics.
   established: 2023,
   values: ['Effortless comfort', 'Timeless style', 'Made with intention'],
   signOff: 'Comfort. Poise. Elegance.',
 
-  // Public URL of the deployed site, used for canonical and Open Graph tags.
-  // Falls back to the current origin when not set.
   siteUrl: import.meta.env.VITE_SITE_URL || '',
 
   whatsapp: {

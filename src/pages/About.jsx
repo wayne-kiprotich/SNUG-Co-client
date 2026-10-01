@@ -6,11 +6,6 @@ import { StoreLocation } from '../components/StoreLocation'
 import { site } from '../config/site'
 import { useSeo } from '../lib/seo'
 
-/*
- * About copy is assembled from SNUG's own public words: the Instagram bio, the
- * shoot-day post, captions and brand graphics. No history, founder details or
- * production claims beyond what SNUG has posted. Final copy needs client approval (PRD §3, §19).
- */
 export default function About() {
   useSeo({
     title: 'About',

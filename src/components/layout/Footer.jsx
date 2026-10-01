@@ -5,19 +5,19 @@ import { Wordmark } from '../Wordmark'
 
 export function Footer() {
   const year = new Date().getFullYear()
-  const heading = 'text-sm text-paper/60'
+  const heading = 'text-sm text-on-bar/60'
   const list = 'mt-3 space-y-2 text-[0.9375rem]'
   const link = 'transition-colors hover:text-bone-deep hover:underline underline-offset-4'
 
   return (
-    <footer className="bg-ink text-paper">
+    <footer className="bg-bar text-on-bar">
       <div className="shell grid gap-10 pb-10 pt-14 md:grid-cols-12 md:gap-8 lg:pt-20">
         <div className="md:col-span-5 lg:col-span-4">
           <Link to="/" className="text-[2rem]" aria-label="Snug & Co. home">
             <Wordmark inverse />
           </Link>
-          <p className="mt-4 max-w-xs text-paper/75">{site.tagline}</p>
-          <p className="mt-1 text-sm text-paper/50">Est. {site.established}</p>
+          <p className="mt-4 max-w-xs text-on-bar/75">{site.tagline}</p>
+          <p className="mt-1 text-sm text-on-bar/50">Est. {site.established}</p>
         </div>
 
         <nav aria-label="Footer" className="grid grid-cols-2 gap-8 sm:grid-cols-3 md:col-span-7 lg:col-span-5">
@@ -80,7 +80,7 @@ export function Footer() {
 
         <div className="md:col-span-12 lg:col-span-3">
           <h2 className={heading}>Location</h2>
-          <address className="mt-3 not-italic leading-relaxed text-paper/85">
+          <address className="mt-3 not-italic leading-relaxed text-on-bar/85">
             {site.address.building}
             <br />
             {site.address.street}, {site.address.unit}
@@ -94,7 +94,7 @@ export function Footer() {
       </div>
 
       <div className="shell">
-        <div className="flex flex-col gap-2 border-t border-paper/15 py-6 text-[0.8125rem] text-paper/55 sm:flex-row sm:justify-between">
+        <div className="flex flex-col gap-2 border-t border-on-bar/15 py-6 text-[0.8125rem] text-on-bar/55 sm:flex-row sm:justify-between">
           <p>
             © {year} {site.brandName} All rights reserved.
           </p>

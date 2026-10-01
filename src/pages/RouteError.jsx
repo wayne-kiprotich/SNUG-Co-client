@@ -2,13 +2,11 @@ import { useEffect } from 'react'
 import { Link, useRouteError } from 'react-router-dom'
 import { isChunkError, reloadOnce } from '../lib/reload'
 
-/** Shown when a page crashes, instead of a raw error screen. */
 export default function RouteError() {
   const error = useRouteError()
   const stale = isChunkError(error)
   if (import.meta.env.DEV) console.error(error)
 
-  // A missing script file means the site was updated while this tab was open.
   useEffect(() => {
     if (stale) reloadOnce()
   }, [stale])

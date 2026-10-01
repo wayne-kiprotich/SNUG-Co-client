@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom'
 import { EVENTS, track } from '../../lib/analytics'
 import { Img } from '../Img'
 
-/** Asymmetric editorial block for the Kenya collection (PRD §10.8). */
 export function FeatureStory() {
   return (
     <section aria-labelledby="kenya-title" className="py-16 lg:py-24">

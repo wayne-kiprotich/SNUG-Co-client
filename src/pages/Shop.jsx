@@ -37,7 +37,6 @@ export default function Shop() {
       collection: collection?.slug,
       newOnly,
     })
-    // Search results keep relevance order unless the customer picks a sort.
     return query && !searchParams.get('sort') ? filtered : sortProducts(filtered, sort)
   }, [catalog, query, category, collection, newOnly, sort, searchParams])
 
@@ -73,7 +72,6 @@ export default function Shop() {
     }
   }, [catalog, category, collection, newOnly])
 
-  /** Build a shop URL, changing only what is passed. `null` removes a value. */
   const hrefFor = useCallback(
     (changes) => {
       const nextCategory = 'category' in changes ? changes.category : categoryParam
@@ -110,7 +108,6 @@ export default function Shop() {
 
       {catalog && (
         <>
-          {/* Desktop and tablet controls */}
           <div className="mt-8 hidden items-center justify-between gap-6 border-y border-line py-4 md:flex">
             <nav aria-label="Categories" className="flex min-w-0 flex-wrap items-center gap-2">
               {chipCategories.map((c) => (
@@ -153,7 +150,6 @@ export default function Shop() {
             </label>
           </div>
 
-          {/* Phone controls */}
           <div className="mt-6 flex items-center justify-between border-y border-line py-2 md:hidden">
             <p className="text-sm text-stone" aria-live="polite">
               {products.length} {products.length === 1 ? 'piece' : 'pieces'}

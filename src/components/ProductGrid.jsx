@@ -24,7 +24,6 @@ export function ProductGridSkeleton({ count = 8 }) {
   )
 }
 
-/** Swipeable row on phones, grid from tablet up (PRD §10.5). */
 export function ProductRail({ products }) {
   return (
     <ul className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-2.5 overflow-x-auto scroll-px-4 px-4 sm:-mx-6 sm:scroll-px-6 sm:px-6 md:mx-0 md:grid md:grid-cols-3 md:gap-x-4 md:gap-y-10 md:overflow-visible md:px-0 lg:grid-cols-4 lg:gap-x-5">

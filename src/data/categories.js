@@ -1,7 +1,3 @@
-/**
- * Garment categories. Driven by the pieces SNUG & Co. actually shows on Instagram.
- * Caps are not listed because no cap is offered for sale in the current posts.
- */
 export const categories = [
   {
     id: 'c1',
@@ -37,10 +33,6 @@ export const categories = [
   },
 ]
 
-/**
- * Themed collections. A product can belong to several.
- * "His & Hers" is a collection, not a category, until SNUG confirms otherwise (PRD §10.9).
- */
 export const collections = [
   {
     id: 'k1',

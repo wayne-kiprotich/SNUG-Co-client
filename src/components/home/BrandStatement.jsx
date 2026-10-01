@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import { site } from '../../config/site'
 
-// Copy drawn from SNUG's Instagram bio and brand graphics. Final wording needs client approval (PRD §10.7).
 export function BrandStatement() {
   return (
     <section aria-labelledby="statement-title" className="bg-bone">

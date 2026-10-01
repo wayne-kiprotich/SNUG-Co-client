@@ -1,7 +1,3 @@
-/**
- * Text wordmark echoing the Snug & Co. logo: light letters with a heavy espresso ampersand.
- * Swap for the official vector logo once SNUG supplies it.
- */
 export function Wordmark({ className = '', inverse = false }) {
   return (
     <span

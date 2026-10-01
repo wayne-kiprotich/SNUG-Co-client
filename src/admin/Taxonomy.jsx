@@ -79,7 +79,6 @@ function Row({ kind, item, index, count, onSaved, onDeleted, onMove }) {
   const [picking, setPicking] = useState(false)
   const closePicker = useCallback(() => setPicking(false), [])
 
-  // Follow the server after a move or reload.
   useEffect(() => {
     setForm({ name: item.name, slug: item.slug, description: item.description, image: item.image })
   }, [item])

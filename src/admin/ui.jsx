@@ -7,7 +7,6 @@ export const textareaClass =
 export const smallButton =
   'inline-flex min-h-9 items-center justify-center rounded-[2px] border border-line px-3 text-sm transition-colors hover:border-ink disabled:cursor-not-allowed disabled:opacity-40'
 
-/** Label, control and message in one place. `children` receives the props the control needs. */
 export function Field({ label, error, hint, children, className = '' }) {
   const id = useId()
   const describedBy = [error && `${id}-err`, hint && `${id}-hint`].filter(Boolean).join(' ') || undefined
@@ -49,7 +48,6 @@ export function Check({ label, hint, checked, onChange, disabled }) {
   )
 }
 
-/** Two-step delete: the first press asks, the second confirms. Resets after a few seconds. */
 export function ConfirmButton({ children, confirmLabel = 'Press again to confirm', onConfirm, className = '', disabled }) {
   const [armed, setArmed] = useState(false)
   const timer = useRef(null)

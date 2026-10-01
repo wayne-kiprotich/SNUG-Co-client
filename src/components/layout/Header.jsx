@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { navigation } from '../../config/site'
 import { InstagramLink, WhatsAppLink } from '../ContactLinks'
 import { InstagramIcon, MenuIcon, SearchIcon, WhatsAppIcon } from '../Icons'
+import { ThemeToggle } from '../ThemeToggle'
 import { Wordmark } from '../Wordmark'
 import { MobileMenu } from './MobileMenu'
 import { SearchDialog } from './SearchDialog'
@@ -26,7 +27,6 @@ export function Header() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Close overlays on navigation.
   useEffect(() => {
     setMenuOpen(false)
     setSearchOpen(false)
@@ -46,7 +46,6 @@ export function Header() {
         }`}
       >
         <div className="shell grid h-16 grid-cols-[1fr_auto_1fr] items-center lg:h-[4.5rem] lg:grid-cols-[auto_1fr_auto] lg:gap-10">
-          {/* Mobile: menu left */}
           <div className="flex items-center lg:hidden">
             <button type="button" className={`${iconButton} -ml-2.5`} aria-label="Open menu" onClick={() => setMenuOpen(true)}>
               <MenuIcon />
@@ -79,6 +78,7 @@ export function Header() {
           </nav>
 
           <div className="flex items-center justify-self-end">
+            <ThemeToggle className={iconButton} />
             <button type="button" className={`${iconButton} -mr-2.5 lg:mr-0`} aria-label="Search" onClick={() => setSearchOpen(true)}>
               <SearchIcon />
             </button>

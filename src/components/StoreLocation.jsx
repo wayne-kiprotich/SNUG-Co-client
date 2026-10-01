@@ -2,7 +2,6 @@ import { site } from '../config/site'
 import { DirectionsLink, InstagramLink, WhatsAppLink } from './ContactLinks'
 import { InstagramIcon, MapPinIcon, WhatsAppIcon } from './Icons'
 
-/** Physical-store block. Opening hours only show once SNUG confirms them (PRD §10.12). */
 export function StoreLocation({ headingLevel: H = 'h2', title = 'Find us in Nairobi CBD' }) {
   const { address, openingHours } = site
 

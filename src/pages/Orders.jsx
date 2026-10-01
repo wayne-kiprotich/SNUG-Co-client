@@ -12,7 +12,6 @@ const STEPS = [
   { title: 'Confirm with us', body: 'We reply to confirm availability, payment and delivery before anything is final.' },
 ]
 
-// Policies come from site.policies. Null means SNUG has not confirmed it yet: show a prompt, never an invented policy.
 const POLICY_SECTIONS = [
   { key: 'delivery', title: 'Delivery' },
   { key: 'collection', title: 'Collecting in Nairobi' },

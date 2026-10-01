@@ -2,11 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import { useMediaQuery } from '../../hooks/useMediaQuery'
 import { Img } from '../Img'
 
-/**
- * Phones and tablets: full-bleed swipe carousel with position indicators.
- * Desktop: an editorial stack of large images beside the sticky purchase panel.
- * Only one layout renders, so the first image is never downloaded twice. Works with a single image.
- */
 export function ProductGallery({ product }) {
   const desktop = useMediaQuery('(min-width: 1024px)')
   if (product.images.length === 0) return <Img id={null} alt={product.name} priority />

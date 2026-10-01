@@ -44,13 +44,9 @@ function setJsonLd(data) {
   document.head.appendChild(el)
 }
 
-/**
- * Per-page title, description, canonical, Open Graph, X/Twitter and JSON-LD.
- * `image` is a site-relative path; defaults to the brand share image.
- */
 export function useSeo({ title, description, path, image, type = 'website', jsonLd }) {
-  const fullTitle = title ? `${title} | ${site.brandName}` : `${site.brandName} | ${site.tagline}`
-  const desc = description || site.bio
+  const fullTitle = title ? `${title} | ${site.brandName}` : `${site.brandName} | ${site.seoTitle}`
+  const desc = description || site.seoDescription
   const jsonLdKey = jsonLd ? JSON.stringify(jsonLd) : ''
 
   useEffect(() => {
@@ -72,7 +68,6 @@ export function useSeo({ title, description, path, image, type = 'website', json
   }, [fullTitle, desc, path, image, type, jsonLdKey])
 }
 
-/** schema.org ClothingStore built only from confirmed configuration. */
 export function storeJsonLd() {
   const { address } = site
   const data = {
@@ -80,6 +75,9 @@ export function storeJsonLd() {
     '@type': 'ClothingStore',
     name: site.brandName,
     slogan: site.tagline,
+    description: site.seoDescription,
+    areaServed: 'KE',
+    priceRange: 'KSh',
     url: siteOrigin(),
     logo: absoluteUrl('/images/logo-320.webp'),
     image: absoluteUrl('/og-default.jpg'),

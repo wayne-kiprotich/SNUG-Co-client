@@ -2,11 +2,6 @@ import { Link } from 'react-router-dom'
 import { EVENTS, track } from '../../lib/analytics'
 import { Img } from '../Img'
 
-/**
- * SNUG sells coordinated sets for him and her (captions: "limited-edition His & Hers sets",
- * "whether you're shopping for him or for her"). Presented as a collection, not a category.
- * The oversized ampersand borrows the heavy espresso "&" from the logo.
- */
 export function HisAndHers({ catalog }) {
   const pieces = catalog.products.filter((p) => p.collections.includes('his-and-hers') && p.images.length).slice(0, 2)
 

@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import { WhatsAppLink } from './ContactLinks'
 
-/** Empty and error states give direction, not mood (PRD §44–46). */
 export function EmptyState({ title, body, actions }) {
   return (
     <div className="border-y border-line py-14 lg:py-20">

@@ -1,11 +1,5 @@
 import manifest from '../data/image-manifest.json'
 
-/**
- * Image lookup for both kinds of photo on the site:
- *  - bundled photos, described by data/image-manifest.json and served from /images
- *  - photos uploaded through the admin, described by the API and served from its upload URL
- * Components ask for an image by id and never care which kind it is.
- */
 const uploaded = new Map()
 
 export function registerImages(images) {
@@ -27,7 +21,6 @@ export function srcSetFor(image) {
   return image.widths.map((w) => `${image.url(w)} ${w}w`).join(', ')
 }
 
-/** URL of the requested width, or the largest available. Null when the image is unknown. */
 export function imageSrc(id, width) {
   const image = getImage(id)
   if (!image) return null

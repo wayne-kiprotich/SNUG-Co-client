@@ -4,10 +4,6 @@ import { Wordmark } from './Wordmark'
 
 export { imageSrc }
 
-/**
- * Responsive, lazy-loaded WebP image with reserved 4:5 space (no layout shift)
- * and an intentional fallback instead of a broken-image icon (PRD §43–44).
- */
 export function Img({ id, alt, sizes = '100vw', priority = false, className = '', imgClassName = '', ratio = '4 / 5' }) {
   const image = getImage(id)
   const [failed, setFailed] = useState(false)

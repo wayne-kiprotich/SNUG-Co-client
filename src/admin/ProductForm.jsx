@@ -81,7 +81,6 @@ function toPayload(f, { creating }) {
   const number = (v) => (String(v).trim() === '' ? null : String(v).trim())
   return {
     name: f.name,
-    // On create an empty slug means "make one from the name". On edit an empty slug is kept as-is.
     slug: f.slug.trim() || (creating ? null : undefined),
     category: f.category,
     collections: f.collections,
@@ -124,7 +123,6 @@ function Section({ title, description, children }) {
   )
 }
 
-// Remount per product so state from "new" never leaks into "edit" after creating.
 export function Component() {
   const { id } = useParams()
   return <ProductEditor key={id ?? 'new'} />

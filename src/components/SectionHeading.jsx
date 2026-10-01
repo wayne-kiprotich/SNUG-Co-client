@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 
-/** Left-aligned section title with an optional link on the right. */
 export function SectionHeading({ title, subtitle, link, id, as: Tag = 'h2' }) {
   return (
     <div className="flex items-end justify-between gap-6">

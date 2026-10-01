@@ -16,7 +16,6 @@ export function Component() {
 
   useEffect(() => {
     document.title = 'Sign in | Snug & Co. admin'
-    // Already signed in? Go straight to the admin.
     api.me().then(() => navigate('/admin', { replace: true })).catch(() => {})
   }, [navigate])
 

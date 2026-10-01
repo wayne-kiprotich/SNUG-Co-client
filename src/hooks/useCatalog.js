@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { getCachedCatalog, loadCatalog, resetCatalogCache } from '../lib/catalog'
 
-/** Loads the catalog with explicit loading and error states (PRD §44–45). */
 export function useCatalog() {
   const cached = getCachedCatalog()
   const [state, setState] = useState(() =>

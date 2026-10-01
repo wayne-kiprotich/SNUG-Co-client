@@ -20,7 +20,6 @@ export function Hero() {
         <p className="hero-rise text-[0.8125rem] tracking-[0.14em] text-stone" style={{ '--i': 0 }}>
           SNUG &amp; CO. — NAIROBI
         </p>
-        {/* Sized to its own column so the longest line always fits: ~6.2em wide. */}
         <h1 id="hero-title" className="type-display mt-5 text-[clamp(2.5rem,15.5cqi,7.25rem)]">
           <span className="hero-rise block" style={{ '--i': 1 }}>
             Minimal,

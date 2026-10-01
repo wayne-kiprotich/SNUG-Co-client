@@ -1,9 +1,5 @@
 import { useEffect, useRef } from 'react'
 
-/**
- * Drives a native <dialog> as a modal: focus trapping, Escape to close and
- * inert background come from the platform. Clicking the backdrop also closes.
- */
 export function useDialog(open, onClose) {
   const ref = useRef(null)
 

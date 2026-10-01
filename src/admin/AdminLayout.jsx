@@ -4,7 +4,6 @@ import { Wordmark } from '../components/Wordmark'
 import { api } from './api'
 import { Spinner, ToastProvider } from './ui'
 
-/** Keeps the admin out of search results. */
 export function useNoIndex() {
   useEffect(() => {
     const meta = document.createElement('meta')
@@ -19,6 +18,7 @@ const NAV = [
   { to: '/admin', label: 'Products', end: true },
   { to: '/admin/categories', label: 'Categories' },
   { to: '/admin/collections', label: 'Collections' },
+  { to: '/admin/settings', label: 'Settings' },
   { to: '/admin/account', label: 'Account' },
 ]
 
@@ -42,7 +42,6 @@ export function Component() {
     return () => {
       active = false
     }
-    // Check once on entry; later expiry is caught by the auth-expired event below.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

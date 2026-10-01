@@ -11,7 +11,6 @@ if (!whatsappConfigured && import.meta.env.DEV) {
   )
 }
 
-/** Build a wa.me link. Without a configured number WhatsApp asks the customer to pick a chat. */
 export function whatsappLink(message) {
   const text = encodeURIComponent(message)
   return number ? `https://wa.me/${number}?text=${text}` : `https://wa.me/?text=${text}`
@@ -21,10 +20,6 @@ export function generalInquiryLink() {
   return whatsappLink(site.whatsapp.generalMessage)
 }
 
-/**
- * Structured order message (PRD §8, step 6). Only selections that apply to the
- * product are included, so staff can identify the piece without follow-up questions.
- */
 export function orderMessage({ product, selection, productUrl }) {
   const lines = [`Hi ${site.brandName}, I'd like to order the ${product.name}.`, '']
 

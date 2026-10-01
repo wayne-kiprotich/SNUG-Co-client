@@ -1,15 +1,7 @@
-/**
- * Catalog access layer.
- *
- * UI code talks to these async functions only, never to the data files directly.
- * Source: the Flask API when VITE_API_URL is set, otherwise the bundled data.
- */
 import { products as localProducts } from '../data/products'
 import { categories as localCategories, collections as localCollections } from '../data/categories'
 import { registerImages } from './images'
 
-// When VITE_API_URL is set the catalog comes from the Flask API and nothing is bundled.
-// Otherwise the bundled data files are used (no backend needed).
 const API_URL = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '')
 
 let cache = null
@@ -36,7 +28,6 @@ export async function loadCatalog() {
   return cache
 }
 
-/** Synchronous read of the cache, for first render without a loading flash. */
 export function getCachedCatalog() {
   return cache
 }
@@ -54,7 +45,6 @@ export const SORT_OPTIONS = [
 
 export function sortProducts(list, sort = 'featured') {
   const items = [...list]
-  // Pieces without a published price always sort after priced ones.
   const price = (p, fallback) => (p.priceKES == null ? fallback : p.priceKES)
   switch (sort) {
     case 'newest':
@@ -85,7 +75,6 @@ const normalise = (s) =>
     .replace(/&/g, ' and ')
     .replace(/[^a-z0-9\s-]/g, ' ')
 
-/** Search product name, category, collections, tags and description. */
 export function searchProducts(catalog, query) {
   const terms = normalise(query).split(/\s+/).filter(Boolean)
   if (!terms.length) return []
@@ -115,7 +104,6 @@ export function searchProducts(catalog, query) {
     .map((r) => r.product)
 }
 
-/** Related pieces: same collection first, then same category. */
 export function relatedProducts(catalog, product, limit = 4) {
   const others = catalog.products.filter((p) => p.id !== product.id)
   const score = (p) =>

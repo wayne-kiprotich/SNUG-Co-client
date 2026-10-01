@@ -255,7 +255,6 @@ export const products = [
       { id: 'colour-block-short-set-2', alt: 'Couple in the brown and cream short set and a black set, studio shot' },
       { id: 'colour-block-short-set-3', alt: 'Brown and cream short set walking alongside the black trouser set' },
     ],
-    // Colourways named in SNUG's caption ("black and white and navy blue and white") plus brown and cream as photographed.
     colors: [
       { name: 'Brown & cream', swatch: ['#4B3328', '#EDE3D0'] },
       { name: 'Black & white', swatch: ['#111111', '#FFFFFF'] },
@@ -473,7 +472,6 @@ export const products = [
       { id: 'green-tracksuit-2', alt: 'Woman in the bottle green tracksuit with a white stripe down the leg' },
       { id: 'green-tracksuit-3', alt: 'His and hers green tracksuits, studio shot' },
     ],
-    // Descriptive names for the two shades photographed. Confirm official colour names.
     colors: [
       { name: 'Bottle green', swatch: ['#1F4A35'] },
       { name: 'Teal green', swatch: ['#2F5E57'] },
@@ -703,7 +701,6 @@ export const products = [
       { id: 'argentina-jersey-2', alt: 'Close-up of the Argentina 10 print on the jersey' },
     ],
     colors: null,
-    // Published in the caption: "Sizes s-xxl".
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     options: [],
     details: ['V-neck collar', 'Number 10 print'],

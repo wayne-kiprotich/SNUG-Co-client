@@ -16,7 +16,6 @@ export default function Home() {
   const { status, catalog, retry } = useCatalog()
   useSeo({ path: '/', jsonLd: storeJsonLd() })
 
-  // Four fills one desktop row; the full list lives at /shop/new.
   const newArrivals = catalog ? catalog.products.filter((p) => p.newArrival).slice(0, 4) : []
 
   return (

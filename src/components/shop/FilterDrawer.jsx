@@ -3,7 +3,6 @@ import { useDialog } from '../../hooks/useDialog'
 import { SORT_OPTIONS } from '../../lib/catalog'
 import { CloseIcon } from '../Icons'
 
-/** Mobile "Filter / Sort" bottom sheet (PRD §11). */
 export function FilterDrawer({ open, onClose, catalog, current, hrefFor, onSortChange, resultCount }) {
   const ref = useDialog(open, onClose)
 

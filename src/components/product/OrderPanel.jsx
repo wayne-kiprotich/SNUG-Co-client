@@ -9,7 +9,6 @@ import { ChoiceGroup, QuantitySelector, TextOption } from './VariantSelector'
 
 const OUT_OF_REACH = new Set(['sold-out', 'coming-soon'])
 
-/** Purchase panel: variants, quantity and the WhatsApp order hand-off (PRD §13, §18). */
 export function OrderPanel({ product }) {
   const [color, setColor] = useState(product.colors?.length === 1 ? product.colors[0].name : null)
   const [size, setSize] = useState(product.sizes?.length === 1 ? product.sizes[0] : null)
@@ -38,7 +37,6 @@ export function OrderPanel({ product }) {
     return () => observer.disconnect()
   }, [])
 
-  /** Required selections must be made before WhatsApp opens (PRD §18). */
   function validate() {
     const next = {}
     if (product.colors?.length && !color) next.color = 'Choose a colour to continue.'
@@ -183,7 +181,6 @@ export function OrderPanel({ product }) {
         </p>
       </div>
 
-      {/* Sticky thumb-reach CTA on phones while the main button is off screen (PRD §30). */}
       <div
         className={`fixed inset-x-0 bottom-0 z-30 border-t border-line bg-paper/95 px-4 py-3 transition-transform duration-300 lg:hidden ${
           ctaVisible ? 'translate-y-full' : 'translate-y-0'

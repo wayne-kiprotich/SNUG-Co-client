@@ -1,11 +1,6 @@
 import { useId } from 'react'
 import { MinusIcon, PlusIcon } from '../Icons'
 
-/**
- * One group of mutually exclusive choices (colour, size or a product option).
- * Native radios keep keyboard and screen-reader behaviour; each choice shows its
- * name in text, so colour is never the only signal (PRD §15, §31).
- */
 export function ChoiceGroup({ label, name, values, value, onChange, error, groupRef, swatches }) {
   const errorId = useId()
   return (

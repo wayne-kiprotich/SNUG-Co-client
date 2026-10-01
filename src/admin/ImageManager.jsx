@@ -10,10 +10,6 @@ const FOCUS = [
   { value: 0.75, label: 'Lower (shoes and trousers)' },
 ]
 
-/**
- * Photos for one product. Uploads are cropped to the 4:5 portrait the shop uses and
- * saved as web-sized WebP, so any phone photo works. The first photo is the shop card.
- */
 export function ImageManager({ productId, images, onChange }) {
   const notify = useToast()
   const fileInput = useRef(null)
