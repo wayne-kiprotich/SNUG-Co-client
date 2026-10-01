@@ -7,7 +7,7 @@ export { imageSrc }
 export function Img({ id, alt, sizes = '100vw', priority = false, className = '', imgClassName = '', ratio = '4 / 5' }) {
   const image = getImage(id)
   const [failed, setFailed] = useState(false)
-  // Priority images (above the fold) show at once; the rest fade in instead of popping.
+  // Lazy images fade in.
   const [loaded, setLoaded] = useState(priority)
 
   return (

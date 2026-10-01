@@ -26,8 +26,7 @@
     <meta name="google-site-verification" content="%VITE_GOOGLE_SITE_VERIFICATION%" />
     <meta name="twitter:card" content="summary_large_image" />
     <script>
-      // Shop pages: start fetching the catalog and settings while the JavaScript downloads,
-      // since photos depend on them. The admin doesn't use them, so skip it there.
+      // Fetch shop data early (not needed on admin).
       if (!location.pathname.startsWith('/admin')) {
         ;['/api/catalog', '/api/settings'].forEach(function (href) {
           var link = document.createElement('link')

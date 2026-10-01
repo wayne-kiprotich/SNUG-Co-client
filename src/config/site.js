@@ -1,13 +1,4 @@
-/**
- * Central business configuration.
- *
- * Every component reads brand, contact and policy details from here.
- * Never hardcode these values inside components.
- *
- * Values marked PLACEHOLDER are not published anywhere by SNUG & Co.
- * and must be confirmed with the client before launch (PRD §55–56).
- * Source for everything else: the @snug_co_ke Instagram profile and posts.
- */
+// Business details. PLACEHOLDER values must be confirmed with SNUG before launch.
 
 const address = {
   building: 'Mwalimu Sacco Building',
@@ -16,7 +7,7 @@ const address = {
   area: 'Nairobi CBD',
   city: 'Nairobi',
   country: 'Kenya',
-  // PLACEHOLDER: address is taken from the Instagram bio; confirm before deployment.
+  // PLACEHOLDER: from the Instagram bio; confirm.
   confirmed: false,
 }
 
@@ -36,8 +27,7 @@ export const site = {
   siteUrl: import.meta.env.VITE_SITE_URL || '',
 
   whatsapp: {
-    // PLACEHOLDER: SNUG's WhatsApp business number is not published on Instagram.
-    // Set it here or through VITE_WHATSAPP_NUMBER, in international format without "+" (e.g. 2547XXXXXXXX).
+    // PLACEHOLDER: set VITE_WHATSAPP_NUMBER, digits only (e.g. 2547XXXXXXXX).
     number: import.meta.env.VITE_WHATSAPP_NUMBER || '',
     generalMessage: 'Hi Snug & Co., I have a question.',
   },
@@ -47,7 +37,7 @@ export const site = {
     url: 'https://www.instagram.com/snug_co_ke/',
   },
 
-  // PLACEHOLDER: optional contact channels. Leave null to hide them.
+  // PLACEHOLDER: null hides them.
   phone: null,
   email: null,
 
@@ -56,8 +46,7 @@ export const site = {
     `${address.building}, ${address.street}, ${address.city}, ${address.country}`,
   )}`,
 
-  // PLACEHOLDER: opening hours are not published. Use an array like
-  // [{ days: 'Monday – Saturday', hours: '9:00 – 18:00' }] once confirmed.
+  // PLACEHOLDER: e.g. [{ days: 'Monday – Saturday', hours: '9:00 – 18:00' }]
   openingHours: null,
 
   announcement: {
@@ -65,8 +54,7 @@ export const site = {
     href: '/shop?collection=kenya',
   },
 
-  // PLACEHOLDER: business policies must come from SNUG. Null renders an
-  // "ask us on WhatsApp" prompt instead of an invented policy.
+  // PLACEHOLDER: from SNUG only. null shows an "ask us on WhatsApp" prompt.
   policies: {
     delivery: null,
     collection: null,

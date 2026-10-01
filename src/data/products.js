@@ -1,22 +1,5 @@
-/**
- * Product catalog.
- *
- * Source: SNUG & Co.'s Instagram (@snug_co_ke) posts and captions.
- * Product names, prices, materials, sizes and options are only filled in where
- * SNUG has published them. Everything else is an explicit placeholder:
- *
- *   priceKES: null        PLACEHOLDER: price not published. The site shows "Price on request".
- *   sizes: null           PLACEHOLDER: size range not published. Size is confirmed on WhatsApp.
- *   availability          PLACEHOLDER: defaults to 'available' until SNUG confirms stock.
- *   nameConfirmed: false  PLACEHOLDER: descriptive name; SNUG has not named this piece publicly.
- *
- * Availability values: 'available' | 'low-stock' | 'sold-out' | 'coming-soon'
- * Badge values: 'new' | 'bestseller' | 'limited' | 'sold-out'
- * `recency`: 1 = most recently posted on Instagram. Used for "Newest" sorting.
- *
- * REVIEW: pieces in the Matchday collection carry football club, federation and
- * sportswear marks. Confirm with SNUG that they want these listed publicly.
- */
+// Fallback catalog from SNUG's Instagram. null price/sizes = PLACEHOLDER (not published).
+// REVIEW: confirm SNUG wants the Matchday pieces (club/brand marks) listed publicly.
 
 const ALL_SIZES_ON_ORDER = 'Made on order for all sizes. Tell us your size on WhatsApp.'
 

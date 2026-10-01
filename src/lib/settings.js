@@ -4,7 +4,7 @@ import { registerImages } from './images'
 
 const API_URL = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '')
 
-// Used until the admin picks its own photos, and when there is no backend.
+// Fallback photos until the admin picks some.
 export const DEFAULT_VISUALS = {
   heroImage: 'colour-block-short-set-2',
   heroAlt: 'Two models in Snug & Co. sets: a brown and cream short set and a black trouser set',

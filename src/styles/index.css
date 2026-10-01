@@ -21,7 +21,7 @@
   --ease-soft: cubic-bezier(0.22, 0.7, 0.2, 1);
 }
 
-/* Dark mode: dark grey page, soft white text. Set by the header toggle via data-theme. */
+/* Dark mode, set by the header toggle. */
 :root[data-theme='dark'] {
   color-scheme: dark;
   --color-ink: #f1efea;

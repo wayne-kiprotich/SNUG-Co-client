@@ -9,12 +9,5 @@ export const instagramGallery = [
   { image: 'striped-short-set-1', alt: 'Striped short set', href: 'https://www.instagram.com/reel/DdV9Q8qOd95/' },
 ]
 
-/**
- * Customer testimonials.
- *
- * PLACEHOLDER: empty until SNUG supplies real feedback AND permission to publish it
- * (PRD §10.10, §55). Never add invented quotes. Shape:
- *   { quote: '...', name: 'First name or initials', source: 'Instagram DM', approved: true }
- * Only entries with approved: true are rendered.
- */
+// PLACEHOLDER: add only real, approved quotes: { quote, name, source, approved: true }.
 export const testimonials = []

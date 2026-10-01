@@ -17,7 +17,6 @@ const deferred = (Page) => (
   </Suspense>
 )
 
-// Shown while a lazily loaded route's code downloads on the first page load.
 const booting = <div className="min-h-svh" />
 
 const adminRoutes = {
