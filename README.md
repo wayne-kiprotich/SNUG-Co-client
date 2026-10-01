@@ -28,7 +28,6 @@ npm run preview         # serve dist/ locally
 | `src/lib/whatsapp.js` | Builds the order message and wa.me links. |
 | `src/lib/analytics.js` | Provider-agnostic events (`whatsapp_order_clicked`, `product_viewed`, …) pushed to `window.dataLayer`. |
 | `src/lib/seo.js` | Per-page title, description, canonical, Open Graph and JSON-LD. |
-| `scripts/build-images.py` | Crops the Instagram originals to 4:5 and writes responsive WebP files to `public/images/`. |
 
 ## Content sources
 
@@ -53,13 +52,11 @@ These are placeholders in the code and must not go live unconfirmed (PRD §55–
 
 ## Adding or editing a product
 
-With the admin running, use `/admin`. Without a backend:
-
-1. Put the new photos in a folder named `<index>_<anything>.jpg`, add an entry for each one to `IMAGES` in `scripts/build-images.py`, then run `npm run images -- <folder>`.
-2. Add the product to `src/data/products.js`. Fields you leave `null` stay hidden in the UI.
+Use `/admin`. `src/data/products.js` is the fallback catalog used only when `VITE_API_URL` is empty.
 
 ## Deploying
 
-This is a single-page app, so every route has to fall back to `index.html`. `vercel.json` (Vercel) and `public/_redirects` (Netlify, Cloudflare Pages) already do this. Set `VITE_SITE_URL` so that canonical and share links use the real domain.
+Flask serves the built site and falls back to `index.html` for page routes (see `render.yaml` and `server/README.md`). Set `VITE_SITE_URL` so that canonical and share links use the real domain.
 
 Share previews on WhatsApp and Facebook read the static tags in `index.html`, because those crawlers don't run JavaScript. If you need a separate preview for each product, prerender those pages at build time. That is a later enhancement.
+# snugco-client
