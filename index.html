@@ -25,6 +25,9 @@
     <meta name="geo.placename" content="Nairobi" />
     <meta name="google-site-verification" content="%VITE_GOOGLE_SITE_VERIFICATION%" />
     <meta name="twitter:card" content="summary_large_image" />
+    <!-- Start fetching the catalog and settings while the JavaScript downloads; photos depend on them. -->
+    <link rel="preload" href="/api/catalog" as="fetch" crossorigin="anonymous" />
+    <link rel="preload" href="/api/settings" as="fetch" crossorigin="anonymous" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
