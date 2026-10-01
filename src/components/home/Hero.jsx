@@ -1,19 +1,19 @@
 import { Link } from 'react-router-dom'
 import { site } from '../../config/site'
 import { EVENTS, track } from '../../lib/analytics'
+import { useSettings } from '../../lib/settings'
 import { Img } from '../Img'
 
 export function Hero() {
+  const settings = useSettings()
   return (
     <section aria-labelledby="hero-title" className="lg:shell lg:flex lg:min-h-[calc(100svh-6.75rem)] lg:items-stretch lg:gap-10 lg:pb-10">
       <div className="hero-unveil lg:order-2 lg:h-[min(calc(100svh-8rem),60rem)] lg:shrink-0">
-        <Img
-          id="colour-block-short-set-2"
-          alt="Two models in Snug & Co. sets: a brown and cream short set and a black trouser set"
-          sizes="(min-width: 1024px) 48vw, 100vw"
-          priority
-          className="lg:h-full"
-        />
+        {settings ? (
+          <Img id={settings.heroImage} alt={settings.heroAlt} sizes="(min-width: 1024px) 48vw, 100vw" priority className="lg:h-full" />
+        ) : (
+          <div className="bg-bone lg:h-full" style={{ aspectRatio: '4 / 5' }} />
+        )}
       </div>
 
       <div className="gutter flex flex-col justify-end pb-12 pt-7 [container-type:inline-size] lg:order-1 lg:flex-1 lg:pb-2 lg:pt-10">

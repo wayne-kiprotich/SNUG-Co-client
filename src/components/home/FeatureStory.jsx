@@ -1,22 +1,20 @@
 import { Link } from 'react-router-dom'
 import { EVENTS, track } from '../../lib/analytics'
+import { useSettings } from '../../lib/settings'
 import { Img } from '../Img'
 
 export function FeatureStory() {
+  const settings = useSettings()
   return (
     <section aria-labelledby="kenya-title" className="py-16 lg:py-24">
       <div className="lg:shell lg:grid lg:grid-cols-12 lg:gap-10">
         <div className="lg:col-span-7">
-          <Img
-            id="kenya-bomber-jacket-1"
-            alt="Woman wearing the red, green and black Kenya bomber jacket in a garden"
-            sizes="(min-width: 1024px) 55vw, 100vw"
-          />
+          <Img id={settings?.featureImage} alt="The Kenya collection" sizes="(min-width: 1024px) 55vw, 100vw" />
         </div>
 
         <div className="gutter mt-8 lg:col-span-4 lg:col-start-9 lg:mt-0 lg:flex lg:flex-col lg:justify-between">
           <div className="hidden w-3/5 lg:block">
-            <Img id="kenya-cosy-jersey-1" alt="The Kenya Cosy Jersey worn on a staircase" sizes="16vw" />
+            <Img id={settings?.featureImageSmall} alt="The Kenya collection, detail" sizes="16vw" />
           </div>
           <div>
             <p className="text-stone">The Kenya collection</p>

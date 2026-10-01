@@ -22,7 +22,7 @@ const COPY = {
   },
 }
 
-function CoverPicker({ open, onClose, onPick, current }) {
+export function CoverPicker({ open, onClose, onPick, current }) {
   const ref = useDialog(open, onClose)
   const [state, setState] = useState({ status: 'loading', images: [] })
 
