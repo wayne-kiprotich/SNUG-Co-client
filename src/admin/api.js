@@ -22,7 +22,9 @@ async function request(path, { method = 'GET', json, form } = {}) {
 
   let res
   try {
-    res = await fetch(`${BASE}${path}`, { method, headers, body, credentials: 'same-origin' })
+    // 'include' (not 'same-origin'): the admin may be deployed on its own domain, calling
+    // the API on another, and the sign-in cookie still needs to go with every request.
+    res = await fetch(`${BASE}${path}`, { method, headers, body, credentials: 'include' })
   } catch {
     throw new ApiError(0, 'Can’t reach the server. Check your connection and try again.')
   }
