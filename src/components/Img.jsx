@@ -26,7 +26,7 @@ export function Img({ id, alt, sizes = '100vw', priority = false, className = ''
           ref={(el) => el?.complete && el.naturalWidth && setLoaded(true)}
           onLoad={() => setLoaded(true)}
           onError={() => setFailed(true)}
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${loaded ? 'opacity-100' : 'opacity-0'} ${imgClassName}`}
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-200 ${loaded ? 'opacity-100' : 'opacity-0'} ${imgClassName}`}
         />
       ) : (
         <ImageFallback label={alt} />
