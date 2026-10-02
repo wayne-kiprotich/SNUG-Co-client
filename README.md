@@ -58,8 +58,8 @@ Use `/admin`. `src/data/products.js` is the fallback catalog used only when `VIT
 
 Two ways to host this, depending on where the Flask API (`../server`) runs:
 
-- **Same domain as the API:** Flask serves the built site itself and falls back to `index.html` for page routes (see `render.yaml` and `server/README.md`). No extra setup here.
-- **Its own domain** (Vercel, Netlify, …), separate from the API: `vercel.json` and `public/_redirects` already handle the single-page-app fallback for those hosts. Set `VITE_API_URL` to the API's full address (not `/api`), e.g. `https://snug-co-server.onrender.com/api`, and set `ALLOWED_ORIGINS` on the server to this site's address — see "Deploying the client on its own domain" in `server/README.md`. Without both of those, the admin can load products but sign-in won't work (the browser blocks the cross-site cookie).
+- **Vercel (production):** set `VITE_API_URL=/api`. `vercel.json` proxies `/api/*` to `https://snug-co-api.onrender.com/api/*` and falls back to `index.html` for page routes, so the browser only talks to the site's own domain and admin cookies stay same-site. Product photos load straight from Cloudinary.
+- **Same domain as the API:** Flask serves the built site itself and falls back to `index.html` for page routes (see `server/README.md`). No extra setup here.
 
 Either way, set `VITE_SITE_URL` so canonical and share links use the real domain.
 
