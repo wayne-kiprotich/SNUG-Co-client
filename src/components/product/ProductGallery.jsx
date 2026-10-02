@@ -63,13 +63,13 @@ function GalleryCarousel({ images, name }) {
       </ul>
       {images.length > 1 && (
         <>
-          <div className="absolute inset-x-0 bottom-2 flex items-center justify-center md:hidden">
+          <div className="absolute inset-x-0 bottom-0 flex items-center justify-center md:hidden">
             {images.map((img, i) => (
               <button
                 key={img.id}
                 type="button"
                 onClick={() => scrollTo(i)}
-                className="grid h-8 w-6 place-items-center"
+                className="grid h-11 w-7 place-items-center"
                 aria-label={`Show photo ${i + 1} of ${images.length}`}
                 aria-current={i === index ? 'true' : undefined}
               >

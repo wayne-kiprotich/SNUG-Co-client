@@ -284,18 +284,29 @@
     animation-name: drawer-in-top;
   }
 }
-@keyframes shimmer {
-  from {
-    background-position: 100% 0;
-  }
-  to {
-    background-position: 0 0;
+/* Opacity only: runs on the compositor, so loading placeholders don't repaint every frame. */
+@keyframes pulse {
+  50% {
+    opacity: 0.55;
   }
 }
 .skeleton {
-  background: linear-gradient(90deg, var(--color-bone) 0%, var(--color-bone-deep) 50%, var(--color-bone) 100%);
-  background-size: 300% 100%;
-  animation: shimmer 1.4s ease-in-out infinite;
+  background: var(--color-bone-deep);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+/* Grows a small link or button's tap area to at least 44px without moving anything. */
+.tap {
+  position: relative;
+}
+.tap::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: max(100%, 44px);
+  height: max(100%, 44px);
+  transform: translate(-50%, -50%);
 }
 
 @keyframes drawer-in-left {
@@ -314,26 +325,16 @@
     opacity: 0;
   }
 }
-@keyframes unveil {
-  from {
-    clip-path: inset(100% 0 0 0);
-  }
-  to {
-    clip-path: inset(0 0 0 0);
-  }
-}
+/* Headline only, and short: the buttons and photo show at once. */
 @keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(0.6em);
+    transform: translateY(0.4em);
   }
 }
-.hero-unveil {
-  animation: unveil 1100ms var(--ease-soft) both;
-}
 .hero-rise {
-  animation: rise 800ms var(--ease-soft) both;
-  animation-delay: calc(450ms + var(--i, 0) * 110ms);
+  animation: rise 500ms var(--ease-soft) both;
+  animation-delay: calc(var(--i, 0) * 60ms);
 }
 @media (hover: hover) and (pointer: fine) {
   .card-media img {

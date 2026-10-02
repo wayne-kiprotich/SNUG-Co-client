@@ -10,7 +10,7 @@ export function SectionHeading({ title, subtitle, link, id, as: Tag = 'h2' }) {
         {subtitle && <p className="mt-2 text-stone">{subtitle}</p>}
       </div>
       {link && (
-        <Link to={link.to} className="link shrink-0 pb-1 text-[0.9375rem]" onClick={link.onClick}>
+        <Link to={link.to} className="link tap shrink-0 pb-1 text-[0.9375rem]" onClick={link.onClick}>
           {link.label}
         </Link>
       )}
