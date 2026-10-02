@@ -40,6 +40,24 @@
       ]
     },
     {
+      "source": "/api/(settings|catalog|home)",
+      "headers": [
+        {
+          "key": "x-vercel-enable-rewrite-caching",
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "source": "/api/products/:path*",
+      "headers": [
+        {
+          "key": "x-vercel-enable-rewrite-caching",
+          "value": "1"
+        }
+      ]
+    },
+    {
       "source": "/images/(.*)",
       "headers": [
         {
