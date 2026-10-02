@@ -3,13 +3,19 @@ import { createRoot } from 'react-dom/client'
 import App from './App'
 import './styles/index.css'
 import { reloadOnce } from './lib/reload'
+import { settingsReady } from './lib/settings'
 
 window.addEventListener('vite:preloadError', (event) => {
   if (reloadOnce()) event.preventDefault()
 })
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+const render = () =>
+  createRoot(document.getElementById('root')).render(
+    <StrictMode>
+      <App />
+    </StrictMode>,
+  )
+
+// index.html has already asked for the settings; wait briefly for them on the shop (never on admin).
+if (location.pathname.startsWith('/admin')) render()
+else settingsReady(300).then(render)

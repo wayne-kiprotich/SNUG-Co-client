@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { site } from '../../config/site'
-import { useCatalog } from '../../hooks/useCatalog'
+import { useListing } from '../../hooks/useCatalog'
 import { useDialog } from '../../hooks/useDialog'
 import { shopperEnabled } from '../../lib/shopper'
 import { InstagramLink, WhatsAppLink } from '../ContactLinks'
@@ -10,7 +10,7 @@ import { Wordmark } from '../Wordmark'
 
 export function MobileMenu({ open, onClose }) {
   const ref = useDialog(open, onClose)
-  const { catalog } = useCatalog()
+  const { catalog } = useListing(open)
   const categories = catalog?.categories ?? []
   const collections = catalog?.collections ?? []
   const linkClass = 'block py-2 text-[1.625rem] leading-tight transition-colors hover:text-espresso'
@@ -56,6 +56,7 @@ export function MobileMenu({ open, onClose }) {
             Categories
           </p>
           <ul className="mt-1">
+            {!catalog && <MenuSkeleton rows={6} />}
             {categories.map((c) => (
               <li key={c.slug}>
                 <Link to={`/shop/${c.slug}`} className={subLinkClass}>
@@ -69,6 +70,7 @@ export function MobileMenu({ open, onClose }) {
             Collections
           </p>
           <ul className="mt-1">
+            {!catalog && <MenuSkeleton rows={4} />}
             {collections.map((c) => (
               <li key={c.slug}>
                 <Link to={`/shop?collection=${c.slug}`} className={subLinkClass}>
@@ -118,4 +120,12 @@ export function MobileMenu({ open, onClose }) {
       </div>
     </dialog>
   )
+}
+
+function MenuSkeleton({ rows }) {
+  return Array.from({ length: rows }, (_, i) => (
+    <li key={i} aria-hidden="true" className="py-1.5">
+      <div className="skeleton h-[1.7rem] w-40 max-w-full" />
+    </li>
+  ))
 }

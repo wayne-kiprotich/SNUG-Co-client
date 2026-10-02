@@ -1,14 +1,35 @@
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { site } from '../../config/site'
 import { EVENTS, track } from '../../lib/analytics'
+import { fallbackSrc, getImage, srcSetFor } from '../../lib/images'
 import { useSettings } from '../../lib/settings'
 import { Img } from '../Img'
 
 const HERO_SIZES = '(min-width: 1024px) 48vw, 100vw'
 
+// index.html reads this on the next visit and starts the hero photo before the app has loaded.
+function rememberHeroPhoto(id) {
+  const image = getImage(id)
+  try {
+    if (!image) localStorage.removeItem('snug-hero')
+    else
+      localStorage.setItem(
+        'snug-hero',
+        JSON.stringify({ src: fallbackSrc(image, 'large'), srcset: srcSetFor(image, 'large'), sizes: HERO_SIZES }),
+      )
+  } catch {
+    // Storage blocked: no head start next time.
+  }
+}
+
 export function Hero() {
   const settings = useSettings()
   const heroImage = settings?.heroImage
+
+  useEffect(() => {
+    if (heroImage) rememberHeroPhoto(heroImage)
+  }, [heroImage])
 
   // Phones: words and buttons first so the first screen can be acted on; the photo follows.
   // Wide screens: words left, photo right.

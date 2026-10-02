@@ -4,7 +4,7 @@ import { WhatsAppIcon } from '../components/Icons'
 import { Img } from '../components/Img'
 import { QuantitySelector } from '../components/product/VariantSelector'
 import { CatalogError, EmptyState, ShopperUnavailable } from '../components/States'
-import { useCatalog } from '../hooks/useCatalog'
+import { useListing } from '../hooks/useCatalog'
 import { EVENTS, track } from '../lib/analytics'
 import { formatPrice } from '../lib/format'
 import { absoluteUrl, useSeo } from '../lib/seo'
@@ -21,7 +21,7 @@ function choicesText(line) {
 
 export default function Cart() {
   useSeo({ title: 'Your bag', path: '/cart' })
-  const { status, catalog, retry } = useCatalog()
+  const { status, catalog, retry } = useListing()
   const shopper = useShopper({ force: true })
   const [busy, setBusy] = useState(false)
   const [message, setMessage] = useState(null)
@@ -119,7 +119,7 @@ export default function Cart() {
                       )}
                       <button
                         type="button"
-                        className="link self-start text-sm"
+                        className="link tap self-start text-sm"
                         disabled={busy}
                         onClick={() => run(() => removeFromCart(line.key))}
                         aria-label={`Remove ${product.name} from your bag`}
@@ -131,7 +131,7 @@ export default function Cart() {
                 )
               })}
             </ul>
-            <Link to="/shop" className="link mt-6 inline-block text-[0.9375rem]">
+            <Link to="/shop" className="link tap mt-6 inline-block text-[0.9375rem]">
               Continue shopping
             </Link>
           </div>
@@ -180,7 +180,7 @@ export default function Cart() {
                   How ordering works
                 </Link>
               </p>
-              <button type="button" className="link mt-5 text-sm" disabled={busy} onClick={() => run(clearCart)}>
+              <button type="button" className="link tap mt-5 text-sm" disabled={busy} onClick={() => run(clearCart)}>
                 Empty bag
               </button>
               <p role="status" className="mt-3 text-sm text-alert">

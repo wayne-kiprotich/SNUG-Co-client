@@ -1,33 +1,52 @@
-import { useCallback, useEffect, useState } from 'react'
-import { getCachedCatalog, loadCatalog, resetCatalogCache } from '../lib/catalog'
+import { useCallback, useEffect, useReducer } from 'react'
+import { forget, homeKey, listingKey, loadHome, loadListing, loadProduct, NotFoundError, peek, productKey } from '../lib/catalog'
 
-export function useCatalog() {
-  const cached = getCachedCatalog()
-  const [state, setState] = useState(() =>
-    cached ? { status: 'ready', catalog: cached, error: null } : { status: 'loading', catalog: null, error: null },
-  )
+// status: 'idle' (not asked for yet), 'loading', 'ready', 'missing' (404) or 'error'.
+function useResource(key, loader, enabled = true) {
+  const [attempt, rerender] = useReducer((n) => n + 1, 0)
+  const entry = peek(key)
 
-  const load = useCallback(() => {
+  useEffect(() => {
+    if (!enabled || peek(key)) return
     let active = true
-    setState((s) => (s.catalog ? s : { status: 'loading', catalog: null, error: null }))
-    loadCatalog()
-      .then((catalog) => active && setState({ status: 'ready', catalog, error: null }))
-      .catch((error) => active && setState({ status: 'error', catalog: null, error }))
+    loader().then(
+      () => active && rerender(),
+      () => active && rerender(),
+    )
     return () => {
       active = false
     }
-  }, [])
-
-  useEffect(() => {
-    if (state.status === 'ready') return
-    return load()
+    // loader is derived from key.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [key, enabled, attempt])
 
   const retry = useCallback(() => {
-    resetCatalogCache()
-    load()
-  }, [load])
+    forget(key)
+    rerender()
+  }, [key])
 
-  return { ...state, retry }
+  const status = entry?.data
+    ? 'ready'
+    : entry?.error
+      ? entry.error instanceof NotFoundError
+        ? 'missing'
+        : 'error'
+      : enabled
+        ? 'loading'
+        : 'idle'
+  return { status, data: entry?.data ?? null, retry }
+}
+
+/** Card-sized data for every piece, plus categories and collections. enabled: false waits (menu, search). */
+export function useListing(enabled = true) {
+  const { data, ...rest } = useResource(listingKey, loadListing, enabled)
+  return { ...rest, catalog: data }
+}
+
+export function useHome() {
+  return useResource(homeKey, loadHome)
+}
+
+export function useProduct(slug) {
+  return useResource(productKey(slug), () => loadProduct(slug))
 }

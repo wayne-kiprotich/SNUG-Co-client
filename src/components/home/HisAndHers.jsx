@@ -2,9 +2,7 @@ import { Link } from 'react-router-dom'
 import { EVENTS, track } from '../../lib/analytics'
 import { Img } from '../Img'
 
-export function HisAndHers({ catalog }) {
-  const pieces = catalog.products.filter((p) => p.collections.includes('his-and-hers') && p.images.length).slice(0, 2)
-
+export function HisAndHers({ pieces }) {
   return (
     <section aria-labelledby="his-hers-title" className="overflow-hidden border-t border-line py-16 lg:py-24">
       <div className="shell">

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { AVAILABILITY_LABEL, BADGE_LABEL, formatPrice } from '../lib/format'
 import { Img } from './Img'
+import { prefetchProduct } from '../lib/catalog'
 import { getImage, srcSetFor } from '../lib/images'
 import { WishlistButton } from './WishlistButton'
 
@@ -20,7 +21,12 @@ export function ProductCard({ product, sizes = CARD_SIZES, priority = false, eag
 
   return (
     <article className="group relative">
-      <Link to={`/product/${product.slug}`} className="block">
+      <Link
+        to={`/product/${product.slug}`}
+        className="block"
+        onMouseEnter={() => prefetchProduct(product.slug)}
+        onFocus={() => prefetchProduct(product.slug)}
+      >
         <div className="card-media relative">
           <Img
             id={primary?.id}
