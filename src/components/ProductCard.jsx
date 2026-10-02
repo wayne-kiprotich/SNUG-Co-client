@@ -58,9 +58,11 @@ export function ProductCard({ product, sizes = CARD_SIZES, priority = false, eag
         </div>
       </Link>
       {/* Outside the link: a button can't sit inside an <a>. */}
+      {/* 44px tap area around a 36px circle. */}
       <WishlistButton
         product={product}
-        className="absolute right-2 top-2 grid size-9 place-items-center rounded-full bg-paper/85 text-ink transition-colors hover:bg-paper"
+        className="group/heart absolute right-1 top-1 grid size-11 place-items-center text-ink"
+        iconClassName="grid size-9 place-items-center rounded-full bg-paper/85 transition-colors group-hover/heart:bg-paper"
       />
     </article>
   )

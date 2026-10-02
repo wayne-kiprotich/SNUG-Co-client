@@ -6,7 +6,7 @@ import { HeartIcon } from './Icons'
  * Heart that saves a product to the wishlist. label: show text beside the icon.
  * The icon-only button is a toggle (aria-pressed); the labelled one says its state in words.
  */
-export function WishlistButton({ product, className = '', label = false }) {
+export function WishlistButton({ product, className = '', iconClassName, label = false }) {
   const { wishlist } = useShopper()
   if (!shopperEnabled) return null
   const saved = wishlist.includes(product.id)
@@ -30,7 +30,13 @@ export function WishlistButton({ product, className = '', label = false }) {
       title={saved ? 'Saved to your wishlist' : 'Save to wishlist'}
       className={className}
     >
-      <HeartIcon filled={saved} width={label ? 18 : 20} height={label ? 18 : 20} />
+      {iconClassName ? (
+        <span className={iconClassName}>
+          <HeartIcon filled={saved} width={20} height={20} />
+        </span>
+      ) : (
+        <HeartIcon filled={saved} width={label ? 18 : 20} height={label ? 18 : 20} />
+      )}
       {label && (saved ? 'Saved to wishlist' : 'Save to wishlist')}
     </button>
   )

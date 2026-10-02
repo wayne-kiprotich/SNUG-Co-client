@@ -10,7 +10,7 @@ export function SocialGallery() {
         <h2 id="gallery-title" className="type-h2">
           Follow @{site.instagram.handle}
         </h2>
-        <InstagramLink placement="gallery-heading" className="link pb-1 text-[0.9375rem]">
+        <InstagramLink placement="gallery-heading" className="link tap pb-1 text-[0.9375rem]">
           Open Instagram
         </InstagramLink>
       </div>

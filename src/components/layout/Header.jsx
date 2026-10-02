@@ -57,7 +57,7 @@ export function Header() {
             </button>
           </div>
 
-          <Link to="/" className="inline-flex items-center justify-self-center text-[2.25rem] lg:justify-self-start lg:text-[2.75rem]" aria-label="Snug & Co. home">
+          <Link to="/" className="inline-flex min-h-11 items-center justify-self-center text-[2.25rem] lg:justify-self-start lg:text-[2.75rem]" aria-label="Snug & Co. home">
             <Wordmark />
           </Link>
 

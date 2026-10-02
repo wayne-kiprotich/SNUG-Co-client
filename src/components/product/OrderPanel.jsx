@@ -174,8 +174,6 @@ export function OrderPanel({ product }) {
         {!unavailable && <QuantitySelector value={quantity} onChange={setQuantity} />}
       </div>
 
-      <p className="mt-8 max-w-md text-[1.0625rem] leading-relaxed">{product.description}</p>
-
       <div ref={ctaRef} className="mt-8">
         <a
           href={href}
@@ -213,6 +211,9 @@ export function OrderPanel({ product }) {
           </Link>
         </p>
       </div>
+
+      {/* After the button, so the choices and the order button sit together on a phone. */}
+      <p className="mt-8 max-w-md text-[1.0625rem] leading-relaxed">{product.description}</p>
 
       <div
         className={`fixed inset-x-0 bottom-0 z-30 border-t border-line bg-paper/95 px-4 py-3 transition-transform duration-300 lg:hidden ${

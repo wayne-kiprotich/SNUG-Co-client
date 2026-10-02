@@ -7,14 +7,14 @@ import { Wordmark } from '../Wordmark'
 export function Footer() {
   const year = new Date().getFullYear()
   const heading = 'text-sm text-on-bar/60'
-  const list = 'mt-3 space-y-2 text-[0.9375rem]'
-  const link = 'transition-colors hover:text-bone-deep hover:underline underline-offset-4'
+  const list = 'mt-1 text-[0.9375rem]'
+  const link = 'inline-flex min-h-11 items-center transition-colors hover:text-bone-deep hover:underline underline-offset-4'
 
   return (
     <footer className="bg-bar text-on-bar">
       <div className="shell grid gap-10 pb-10 pt-14 md:grid-cols-12 md:gap-8 lg:pt-20">
         <div className="md:col-span-5 lg:col-span-4">
-          <Link to="/" className="text-[2rem]" aria-label="Snug & Co. home">
+          <Link to="/" className="inline-flex min-h-11 items-center text-[2rem]" aria-label="Snug & Co. home">
             <Wordmark inverse />
           </Link>
           <p className="mt-4 max-w-xs text-on-bar/75">{site.tagline}</p>
@@ -88,7 +88,7 @@ export function Footer() {
             <br />
             {site.address.city}, {site.address.country}
           </address>
-          <DirectionsLink placement="footer" className={`${link} mt-3 inline-block text-[0.9375rem]`}>
+          <DirectionsLink placement="footer" className={`${link} mt-1 text-[0.9375rem]`}>
             Get directions
           </DirectionsLink>
         </div>
@@ -100,7 +100,7 @@ export function Footer() {
             © {year} {site.brandName} All rights reserved.
           </p>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-            <ThemeToggle label className="inline-flex items-center gap-2 transition-colors hover:text-on-bar" />
+            <ThemeToggle label className="inline-flex min-h-11 items-center gap-2 transition-colors hover:text-on-bar" />
             <p>Nairobi, Kenya</p>
           </div>
         </div>

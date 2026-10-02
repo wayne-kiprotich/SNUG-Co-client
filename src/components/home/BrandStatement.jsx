@@ -17,7 +17,7 @@ export function BrandStatement() {
               </li>
             ))}
           </ul>
-          <Link to="/about" className="link mt-6 inline-block text-[0.9375rem]">
+          <Link to="/about" className="link tap mt-6 inline-block text-[0.9375rem]">
             About Snug & Co.
           </Link>
         </div>
