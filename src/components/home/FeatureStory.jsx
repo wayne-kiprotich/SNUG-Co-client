@@ -9,7 +9,7 @@ export function FeatureStory() {
     <section aria-labelledby="kenya-title" className="py-16 lg:py-24">
       <div className="lg:shell lg:grid lg:grid-cols-12 lg:gap-10">
         <div className="lg:col-span-7">
-          <Img id={settings?.featureImage} alt="The Kenya collection" sizes="(min-width: 1024px) 55vw, 100vw" />
+          <Img id={settings?.featureImage} alt="The Kenya collection" sizes="(min-width: 1024px) 55vw, 100vw" ladder="large" />
         </div>
 
         <div className="gutter mt-8 lg:col-span-4 lg:col-start-9 lg:mt-0 lg:flex lg:flex-col lg:justify-between">

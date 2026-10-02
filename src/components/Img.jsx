@@ -1,28 +1,40 @@
 import { useState } from 'react'
-import { getImage, imageSrc, srcSetFor } from '../lib/images'
+import { fallbackSrc, getImage, imageSrc, srcSetFor } from '../lib/images'
 import { Wordmark } from './Wordmark'
 
 export { imageSrc }
 
-export function Img({ id, alt, sizes = '100vw', priority = false, className = '', imgClassName = '', ratio = '4 / 5' }) {
+// priority: the main above-the-fold photo (loads first). eager: visible at load, normal priority.
+// Everything else loads lazily as it scrolls into view. ladder: see LADDERS in lib/images.
+export function Img({
+  id,
+  alt,
+  sizes = '100vw',
+  ladder = 'card',
+  priority = false,
+  eager = false,
+  className = '',
+  imgClassName = '',
+  ratio = '4 / 5',
+}) {
   const image = getImage(id)
   const [failed, setFailed] = useState(false)
   // Lazy images fade in.
-  const [loaded, setLoaded] = useState(priority)
+  const [loaded, setLoaded] = useState(priority || eager)
 
   return (
     <div className={`relative overflow-hidden bg-bone ${className}`} style={{ aspectRatio: ratio }}>
       {image && !failed ? (
         <img
-          src={image.url(image.widths.at(-1))}
-          srcSet={srcSetFor(image)}
+          src={fallbackSrc(image, ladder)}
+          srcSet={srcSetFor(image, ladder)}
           sizes={sizes}
           width={image.width}
           height={image.height}
           alt={alt}
-          loading={priority ? 'eager' : 'lazy'}
+          loading={priority || eager ? 'eager' : 'lazy'}
           fetchPriority={priority ? 'high' : undefined}
-          decoding={priority ? 'sync' : 'async'}
+          decoding="async"
           ref={(el) => el?.complete && el.naturalWidth && setLoaded(true)}
           onLoad={() => setLoaded(true)}
           onError={() => setFailed(true)}
@@ -38,7 +50,7 @@ export function Img({ id, alt, sizes = '100vw', priority = false, className = ''
 export function ImageFallback({ label }) {
   return (
     <div role="img" aria-label={label || 'Image unavailable'} className="absolute inset-0 grid place-items-center bg-bone text-taupe">
-      <Wordmark className="text-lg" />
+      <Wordmark className="text-lg" decorative />
     </div>
   )
 }

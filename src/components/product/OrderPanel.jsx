@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom'
 import { EVENTS, track } from '../../lib/analytics'
 import { AVAILABILITY_LABEL, formatPrice } from '../../lib/format'
 import { absoluteUrl } from '../../lib/seo'
+import { addToCart, shopperEnabled } from '../../lib/shopper'
 import { orderMessage, restockMessage, whatsappLink } from '../../lib/whatsapp'
-import { WhatsAppIcon } from '../Icons'
+import { BagIcon, WhatsAppIcon } from '../Icons'
+import { WishlistButton } from '../WishlistButton'
 import { ChoiceGroup, QuantitySelector, TextOption } from './VariantSelector'
 
 const OUT_OF_REACH = new Set(['sold-out', 'coming-soon'])
@@ -16,6 +18,7 @@ export function OrderPanel({ product }) {
   const [quantity, setQuantity] = useState(1)
   const [errors, setErrors] = useState({})
   const [ctaVisible, setCtaVisible] = useState(true)
+  const [bag, setBag] = useState({ busy: false, message: null, added: false })
 
   const refs = { color: useRef(null), size: useRef(null) }
   const optionRefs = useRef({})
@@ -73,6 +76,19 @@ export function OrderPanel({ product }) {
       quantity,
       placement,
     })
+  }
+
+  async function handleAddToBag() {
+    if (!validate()) return
+    setBag({ busy: true, message: null, added: false })
+    try {
+      await addToCart({ productId: product.id, color, size, options, quantity })
+      track(EVENTS.addedToCart, { product: product.slug, price: product.priceKES, color, size, quantity })
+      setBag({ busy: false, message: 'Added to your bag.', added: true })
+    } catch (err) {
+      setErrors(err.fields || {})
+      setBag({ busy: false, message: err.message, added: false })
+    }
   }
 
   const setOption = (name, value) => {
@@ -171,6 +187,23 @@ export function OrderPanel({ product }) {
           <WhatsAppIcon />
           {ctaLabel}
         </a>
+        <div className="mt-3 flex gap-3">
+          {shopperEnabled && !unavailable && (
+            <button type="button" className="btn btn-secondary min-h-12 flex-1" onClick={handleAddToBag} disabled={bag.busy}>
+              <BagIcon width={18} height={18} />
+              {bag.busy ? 'Adding…' : 'Add to bag'}
+            </button>
+          )}
+          <WishlistButton product={product} label className={`btn btn-secondary min-h-12 ${unavailable ? 'flex-1' : ''}`} />
+        </div>
+        <p role="status" className={`text-sm ${bag.message ? 'mt-3' : ''} ${bag.added ? '' : 'text-alert'}`}>
+          {bag.message}{' '}
+          {bag.added && (
+            <Link to="/cart" className="link">
+              View bag
+            </Link>
+          )}
+        </p>
         <p className="mt-3 text-sm text-stone">
           {unavailable
             ? 'We’ll let you know on WhatsApp when it’s back.'

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { AVAILABILITY_LABEL, BADGE_LABEL, formatPrice } from '../lib/format'
 import { Img } from './Img'
 import { getImage, srcSetFor } from '../lib/images'
+import { WishlistButton } from './WishlistButton'
 
 const CARD_SIZES = '(min-width: 1024px) 23vw, (min-width: 768px) 31vw, 48vw'
 
@@ -10,7 +11,7 @@ function badgeFor(product) {
   return product.badge ? BADGE_LABEL[product.badge] : null
 }
 
-export function ProductCard({ product, sizes = CARD_SIZES, priority = false }) {
+export function ProductCard({ product, sizes = CARD_SIZES, priority = false, eager = false }) {
   const [primary, secondary] = product.images
   const secondaryImage = getImage(secondary?.id)
   const badge = badgeFor(product)
@@ -26,13 +27,14 @@ export function ProductCard({ product, sizes = CARD_SIZES, priority = false }) {
             alt={primary?.alt ?? product.name}
             sizes={sizes}
             priority={priority}
+            eager={eager}
             className={soldOut ? 'opacity-60' : ''}
             imgClassName="primary"
           />
           {secondaryImage && (
             <img
-              src={secondaryImage.url(secondaryImage.widths[0])}
-              srcSet={srcSetFor(secondaryImage)}
+              src={secondaryImage.url(secondaryImage.widths?.[0] ?? 480)}
+              srcSet={srcSetFor(secondaryImage, 'card')}
               sizes={sizes}
               alt=""
               aria-hidden="true"
@@ -55,6 +57,11 @@ export function ProductCard({ product, sizes = CARD_SIZES, priority = false }) {
           {showAvailability && <p className="text-[0.8125rem] text-espresso">{AVAILABILITY_LABEL[product.availability]}</p>}
         </div>
       </Link>
+      {/* Outside the link: a button can't sit inside an <a>. */}
+      <WishlistButton
+        product={product}
+        className="absolute right-2 top-2 grid size-9 place-items-center rounded-full bg-paper/85 text-ink transition-colors hover:bg-paper"
+      />
     </article>
   )
 }

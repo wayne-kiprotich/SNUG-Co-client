@@ -1,15 +1,17 @@
 import { useState } from 'react'
 import { MoonIcon, SunIcon } from './Icons'
 
-const KEY = 'snug-theme'
+// New key: earlier visits that followed the system's dark mode start on the cream theme again.
+const KEY = 'snug-theme-choice'
 
-export function ThemeToggle({ className = '' }) {
+// label: show the words beside the icon (menu and footer); the header used to show the icon alone.
+export function ThemeToggle({ className = '', label = false }) {
   const [dark, setDark] = useState(() => document.documentElement.dataset.theme === 'dark')
 
   function toggle() {
     const next = dark ? 'light' : 'dark'
     document.documentElement.dataset.theme = next
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', next === 'dark' ? '#232425' : '#ffffff')
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', next === 'dark' ? '#241a12' : '#faf6f0')
     try {
       localStorage.setItem(KEY, next)
     } catch {
@@ -20,6 +22,7 @@ export function ThemeToggle({ className = '' }) {
   return (
     <button type="button" className={className} aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'} onClick={toggle}>
       {dark ? <SunIcon /> : <MoonIcon />}
+      {label && (dark ? 'Light mode' : 'Dark mode')}
     </button>
   )
 }

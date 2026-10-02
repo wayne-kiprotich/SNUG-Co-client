@@ -16,7 +16,7 @@ function GalleryStack({ images }) {
         const wide = i === 0 && oddLead
         return (
           <li key={img.id} className={wide ? 'col-span-2' : ''}>
-            <Img id={img.id} alt={img.alt} sizes={wide ? '56vw' : '28vw'} priority={i === 0} />
+            <Img id={img.id} alt={img.alt} sizes={wide ? '56vw' : '28vw'} ladder="large" priority={i === 0} />
           </li>
         )
       })}
@@ -57,7 +57,7 @@ function GalleryCarousel({ images, name }) {
       >
         {images.map((img, i) => (
           <li key={img.id} data-index={i} className="w-full shrink-0 snap-center md:w-1/2">
-            <Img id={img.id} alt={img.alt} sizes="(min-width: 768px) 50vw, 100vw" priority={i === 0} />
+            <Img id={img.id} alt={img.alt} sizes="(min-width: 768px) 50vw, 100vw" ladder="large" priority={i === 0} />
           </li>
         ))}
       </ul>

@@ -21,6 +21,7 @@ export default function About() {
             id="editorial-his-hers-1"
             alt="Two models in Snug & Co. pieces: a cream sweatshirt with brown shorts and a maroon retro jacket"
             sizes="(min-width: 1024px) 48vw, 100vw"
+            ladder="large"
             priority
           />
         </div>

@@ -118,3 +118,23 @@ export function SunIcon(props) {
     </svg>
   )
 }
+
+export function HeartIcon({ filled = false, ...props }) {
+  return (
+    <svg {...base} {...props}>
+      <path
+        d="M12 20s-7.5-4.6-7.5-10.1A4.4 4.4 0 0 1 12 7.2a4.4 4.4 0 0 1 7.5 2.7C19.5 15.4 12 20 12 20z"
+        fill={filled ? 'currentColor' : 'none'}
+      />
+    </svg>
+  )
+}
+
+export function BagIcon(props) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M5.5 8h13l-1 12h-11z" />
+      <path d="M9 10V7a3 3 0 0 1 6 0v3" />
+    </svg>
+  )
+}

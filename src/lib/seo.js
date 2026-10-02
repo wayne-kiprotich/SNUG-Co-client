@@ -6,6 +6,7 @@ export function siteOrigin() {
 }
 
 export function absoluteUrl(path = '/') {
+  if (/^https?:\/\//.test(path)) return path
   return `${siteOrigin()}${path.startsWith('/') ? path : `/${path}`}`
 }
 

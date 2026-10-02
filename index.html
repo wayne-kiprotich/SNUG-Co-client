@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="theme-color" content="#faf6f0" />
     <script>
+      // The cream theme is the default; dark only when chosen with the header toggle.
       try {
-        var t = localStorage.getItem('snug-theme')
-        if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+        var t = localStorage.getItem('snug-theme-choice') === 'dark' ? 'dark' : 'light'
         document.documentElement.dataset.theme = t
-        if (t === 'dark') document.querySelector('meta[name="theme-color"]').setAttribute('content', '#232425')
+        if (t === 'dark') document.querySelector('meta[name="theme-color"]').setAttribute('content', '#241a12')
       } catch (e) {}
     </script>
     <title>Snug &amp; Co. | Loungewear, Tracksuits &amp; Matchday Wear in Nairobi, Kenya</title>
@@ -38,9 +38,12 @@
         })
       }
     </script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
+    <!-- Product photos come from Cloudinary: connect early so the hero photo isn't held up. -->
+    <link rel="preconnect" href="https://res.cloudinary.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

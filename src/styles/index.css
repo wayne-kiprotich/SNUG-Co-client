@@ -1,20 +1,20 @@
 @import 'tailwindcss';
 
-/* Light theme tokens. Dark overrides below. */
+/* Light theme tokens: warm white + dark brown. Dark overrides below. */
 @theme {
   --font-sans: 'Archivo', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
 
-  --color-ink: #2b2c2e;
-  --color-paper: #ffffff;
-  --color-bone: #f0ede4;
-  --color-bone-deep: #e6e1d5;
-  --color-espresso: #574741;
-  --color-stone: #5f5c52;
-  --color-taupe: #9c9289;
-  --color-line: #e2ddd2;
-  --color-alert: #7a2e24;
-  --color-bar: #2b2c2e;
-  --color-on-bar: #ffffff;
+  --color-ink: #2e2015;
+  --color-paper: #faf6f0;
+  --color-bone: #f1e8db;
+  --color-bone-deep: #e6d8c3;
+  --color-espresso: #6b4428;
+  --color-stone: #7a6657;
+  --color-taupe: #a8937e;
+  --color-line: #e4d7c5;
+  --color-alert: #8c3a28;
+  --color-bar: #2e2015;
+  --color-on-bar: #faf6f0;
 
   --breakpoint-wide: 90rem;
 
@@ -24,17 +24,23 @@
 /* Dark mode, set by the header toggle. */
 :root[data-theme='dark'] {
   color-scheme: dark;
-  --color-ink: #f1efea;
-  --color-paper: #232425;
-  --color-bone: #2c2d2f;
-  --color-bone-deep: #37383a;
-  --color-espresso: #c8b6a8;
-  --color-stone: #a9a8a3;
-  --color-taupe: #8b8882;
-  --color-line: #3d3e40;
-  --color-alert: #e8877a;
-  --color-bar: #161718;
-  --color-on-bar: #f1efea;
+  --color-ink: #f3e9dc;
+  --color-paper: #241a12;
+  --color-bone: #2a1d14;
+  --color-bone-deep: #352619;
+  --color-espresso: #c9a27c;
+  --color-stone: #b9a792;
+  --color-taupe: #8c7a68;
+  --color-line: #3c2c1f;
+  --color-alert: #e08567;
+  --color-bar: #140d08;
+  --color-on-bar: #f3e9dc;
+}
+:root[data-theme='dark'] .snug-logo {
+  filter: brightness(0) invert(1);
+}
+.snug-logo.invert {
+  filter: brightness(0) invert(1);
 }
 :root[data-theme='dark'] dialog::backdrop {
   background: rgb(0 0 0 / 0.6);

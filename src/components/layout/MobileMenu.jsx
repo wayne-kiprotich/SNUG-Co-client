@@ -2,8 +2,10 @@ import { Link } from 'react-router-dom'
 import { site } from '../../config/site'
 import { useCatalog } from '../../hooks/useCatalog'
 import { useDialog } from '../../hooks/useDialog'
+import { shopperEnabled } from '../../lib/shopper'
 import { InstagramLink, WhatsAppLink } from '../ContactLinks'
 import { CloseIcon, InstagramIcon, WhatsAppIcon } from '../Icons'
+import { ThemeToggle } from '../ThemeToggle'
 import { Wordmark } from '../Wordmark'
 
 export function MobileMenu({ open, onClose }) {
@@ -18,7 +20,7 @@ export function MobileMenu({ open, onClose }) {
     <dialog ref={ref} className="drawer drawer-left" aria-label="Menu">
       <div className="flex h-full flex-col">
         <div className="flex h-16 shrink-0 items-center justify-between border-b border-line px-4">
-          <Wordmark className="text-[1.375rem]" />
+          <Wordmark className="text-[2.25rem]" />
           <button
             type="button"
             onClick={onClose}
@@ -41,6 +43,13 @@ export function MobileMenu({ open, onClose }) {
                 New arrivals
               </Link>
             </li>
+            {shopperEnabled && (
+              <li>
+                <Link to="/wishlist" className={linkClass}>
+                  Wishlist
+                </Link>
+              </li>
+            )}
           </ul>
 
           <p className="mt-7 text-sm text-stone" style={{ fontStretch: '100%' }}>
@@ -99,9 +108,12 @@ export function MobileMenu({ open, onClose }) {
               Instagram
             </InstagramLink>
           </div>
-          <p className="text-[0.8125rem] leading-snug text-stone">
-            {site.address.building}, {site.address.street}, {site.address.city}
-          </p>
+          <div className="flex items-center justify-between gap-4">
+            <p className="text-[0.8125rem] leading-snug text-stone">
+              {site.address.building}, {site.address.street}, {site.address.city}
+            </p>
+            <ThemeToggle label className="flex min-h-11 shrink-0 items-center gap-2 px-2 text-[0.9375rem] hover:text-espresso" />
+          </div>
         </div>
       </div>
     </dialog>

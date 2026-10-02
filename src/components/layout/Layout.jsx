@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { Outlet, ScrollRestoration, useLocation } from 'react-router-dom'
+import { ShopperNotice } from '../ShopperNotice'
 import { AnnouncementBar } from './AnnouncementBar'
 import { Footer } from './Footer'
 import { Header } from './Header'
@@ -29,6 +30,7 @@ export function Layout() {
         <Outlet />
       </main>
       <Footer />
+      <ShopperNotice />
       <ScrollRestoration getKey={(loc) => (loc.key === 'default' ? loc.pathname + loc.search : loc.key)} />
       <HashScroller />
     </>

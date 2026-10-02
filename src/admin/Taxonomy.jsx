@@ -58,7 +58,7 @@ export function CoverPicker({ open, onClose, onPick, current }) {
                     aria-label={`${image.product}: ${image.alt}`}
                     aria-pressed={current === image.id}
                   >
-                    <Img id={image.id} alt="" sizes="120px" />
+                    <Img id={image.id} alt="" sizes="120px" ladder="small" />
                   </button>
                 </li>
               ))}
@@ -120,7 +120,7 @@ function Row({ kind, item, index, count, onSaved, onDeleted, onMove }) {
       <form onSubmit={save} noValidate className="grid gap-5 lg:grid-cols-[8rem_1fr] lg:gap-8">
         <div>
           <div className="w-28 lg:w-full">
-            <Img id={form.image} alt="" sizes="128px" />
+            <Img id={form.image} alt="" sizes="128px" ladder="small" />
           </div>
           <div className="mt-2 flex flex-wrap gap-2">
             <button type="button" className={smallButton} onClick={() => setPicking(true)}>

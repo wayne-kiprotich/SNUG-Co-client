@@ -1,14 +1,16 @@
-export function Wordmark({ className = '', inverse = false }) {
+export function Wordmark({ className = '', inverse = false, decorative = false }) {
+  const img = (
+    <img
+      src="/snug-logo.svg"
+      alt={decorative ? '' : undefined}
+      aria-hidden={decorative || undefined}
+      className={`snug-logo h-[1em] w-auto align-middle ${inverse ? 'invert' : ''} ${className}`}
+    />
+  )
+  if (decorative) return img
   return (
-    <span
-      className={`inline-flex items-baseline gap-[0.22em] whitespace-nowrap font-light tracking-[-0.02em] ${className}`}
-      style={{ fontStretch: '104%' }}
-    >
-      <span>Snug</span>
-      <span className="font-extrabold" style={{ color: inverse ? 'var(--color-taupe)' : 'var(--color-espresso)' }}>
-        &amp;
-      </span>
-      <span>Co.</span>
+    <span role="img" aria-label="Snug & Co." className="inline-flex">
+      {img}
     </span>
   )
 }

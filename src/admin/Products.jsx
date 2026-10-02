@@ -146,7 +146,7 @@ export function Component() {
               {visible.map((p) => (
                 <li key={p.id} className="grid grid-cols-[4.5rem_1fr] gap-x-4 gap-y-3 border-b border-line py-4 lg:grid-cols-[4rem_minmax(0,1fr)_10rem_9rem_auto] lg:items-center lg:gap-x-6">
                   <Link to={`/admin/products/${p.id}`} className="block" aria-hidden="true" tabIndex={-1}>
-                    <Img id={p.images[0]?.id} alt="" sizes="72px" imgClassName={p.published ? '' : 'opacity-50'} />
+                    <Img id={p.images[0]?.id} alt="" sizes="72px" ladder="small" imgClassName={p.published ? '' : 'opacity-50'} />
                   </Link>
 
                   <div className="min-w-0">

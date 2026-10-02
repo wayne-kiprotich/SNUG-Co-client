@@ -82,7 +82,7 @@ export function SearchDialog({ open, onClose }) {
                 {results.slice(0, MAX_RESULTS).map((p) => (
                   <li key={p.id}>
                     <Link to={`/product/${p.slug}`} className="group flex items-center gap-4">
-                      <Img id={p.images[0]?.id} alt="" sizes="64px" className="w-16 shrink-0" />
+                      <Img id={p.images[0]?.id} alt="" sizes="64px" ladder="small" className="w-16 shrink-0" />
                       <span className="min-w-0">
                         <span className="block truncate group-hover:underline">{p.name}</span>
                         <span className="block text-sm text-stone">{formatPrice(p.priceKES)}</span>

@@ -37,3 +37,20 @@ export function ShopAllLink({ className = 'btn btn-primary' }) {
     </Link>
   )
 }
+
+export function ShopperUnavailable({ message, onRetry }) {
+  return (
+    <div role="alert" className="border-y border-line py-14 lg:py-20">
+      <p className="type-h3">We couldn’t load this just now.</p>
+      <p className="mt-2 max-w-md text-stone">{message}</p>
+      <div className="mt-6 flex flex-wrap gap-3">
+        <button type="button" className="btn btn-primary" onClick={onRetry}>
+          Try again
+        </button>
+        <WhatsAppLink placement="shopper-error" className="btn btn-secondary">
+          Message us on WhatsApp
+        </WhatsAppLink>
+      </div>
+    </div>
+  )
+}

@@ -10,6 +10,8 @@ import Shop from './pages/Shop'
 const About = lazy(() => import('./pages/About'))
 const Contact = lazy(() => import('./pages/Contact'))
 const Orders = lazy(() => import('./pages/Orders'))
+const Cart = lazy(() => import('./pages/Cart'))
+const Wishlist = lazy(() => import('./pages/Wishlist'))
 
 const deferred = (Page) => (
   <Suspense fallback={<div className="min-h-[70vh]" />}>
@@ -49,6 +51,8 @@ const router = createBrowserRouter([
       { path: '/about', element: deferred(About) },
       { path: '/contact', element: deferred(Contact) },
       { path: '/shipping-and-orders', element: deferred(Orders) },
+      { path: '/cart', element: deferred(Cart) },
+      { path: '/wishlist', element: deferred(Wishlist) },
       { path: '/404', element: <NotFound /> },
       { path: '*', element: <NotFound /> },
     ],

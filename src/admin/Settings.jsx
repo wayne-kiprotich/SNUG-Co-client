@@ -91,7 +91,7 @@ export function Component() {
           {VISUALS.map(({ key, label, hint }) => (
             <div key={key} className="flex items-start gap-4">
               <div className="w-24 shrink-0">
-                <Img id={form[key] || DEFAULT_VISUALS[key]} alt="" sizes="96px" />
+                <Img id={form[key] || DEFAULT_VISUALS[key]} alt="" sizes="96px" ladder="small" />
               </div>
               <div className="min-w-0">
                 <p className="font-medium">{label}</p>

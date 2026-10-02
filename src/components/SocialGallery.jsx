@@ -22,6 +22,7 @@ export function SocialGallery() {
                 id={item.image}
                 alt=""
                 sizes="(min-width: 1024px) 12vw, 25vw"
+                ladder="small"
                 imgClassName="transition-opacity duration-300 group-hover:opacity-85"
               />
             </InstagramLink>

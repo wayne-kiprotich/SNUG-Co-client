@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { site } from '../../config/site'
 import { DirectionsLink, InstagramLink, WhatsAppLink } from '../ContactLinks'
+import { ThemeToggle } from '../ThemeToggle'
 import { Wordmark } from '../Wordmark'
 
 export function Footer() {
@@ -98,7 +99,10 @@ export function Footer() {
           <p>
             © {year} {site.brandName} All rights reserved.
           </p>
-          <p>Nairobi, Kenya</p>
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+            <ThemeToggle label className="inline-flex items-center gap-2 transition-colors hover:text-on-bar" />
+            <p>Nairobi, Kenya</p>
+          </div>
         </div>
       </div>
     </footer>

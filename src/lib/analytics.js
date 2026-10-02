@@ -8,6 +8,9 @@ export const EVENTS = {
   searchPerformed: 'search_performed',
   shopCtaClicked: 'shop_cta_clicked',
   collectionClicked: 'collection_clicked',
+  wishlistToggled: 'wishlist_toggled',
+  addedToCart: 'added_to_cart',
+  whatsappCartOrderClicked: 'whatsapp_cart_order_clicked',
 }
 
 export function track(event, properties = {}) {

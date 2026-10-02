@@ -7,7 +7,8 @@ export function ProductGrid({ products, priorityCount = 0 }) {
     <ul className={gridClass}>
       {products.map((p, i) => (
         <li key={p.id}>
-          <ProductCard product={p} priority={i < priorityCount} />
+          {/* Only the first two get high priority; the rest of the first row is eager, the others lazy. */}
+          <ProductCard product={p} priority={i < Math.min(2, priorityCount)} eager={i < priorityCount} />
         </li>
       ))}
     </ul>

@@ -64,7 +64,6 @@ export const site = {
 }
 
 export const navigation = [
-  { label: 'Home', to: '/' },
   { label: 'Shop', to: '/shop' },
   { label: 'New arrivals', to: '/shop/new' },
   { label: 'About', to: '/about' },

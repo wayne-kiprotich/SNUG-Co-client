@@ -71,7 +71,7 @@ export function ImageManager({ productId, images, onChange }) {
             className="block w-full text-sm file:mr-3 file:min-h-11 file:cursor-pointer file:rounded-[2px] file:border file:border-ink file:bg-paper file:px-4 file:text-sm hover:file:bg-bone"
           />
           <p className="mt-1.5 text-[0.8125rem] text-stone">
-            JPEG, PNG or WebP, at least 600px wide, up to 16 MB each. Portrait photos work best. {images.length} of 12 used.
+            JPEG, PNG or WebP, at least 600px wide, up to 10 MB each. Portrait photos work best. {images.length} of 12 used.
           </p>
         </div>
         <div>

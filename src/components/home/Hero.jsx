@@ -10,7 +10,7 @@ export function Hero() {
     <section aria-labelledby="hero-title" className="lg:shell lg:flex lg:min-h-[calc(100svh-6.75rem)] lg:items-stretch lg:gap-10 lg:pb-10">
       <div className="hero-unveil lg:order-2 lg:h-[min(calc(100svh-8rem),60rem)] lg:shrink-0">
         {settings ? (
-          <Img id={settings.heroImage} alt={settings.heroAlt} sizes="(min-width: 1024px) 48vw, 100vw" priority className="lg:h-full" />
+          <Img id={settings.heroImage} alt={settings.heroAlt} sizes="(min-width: 1024px) 48vw, 100vw" ladder="large" priority className="lg:h-full" />
         ) : (
           <div className="bg-bone lg:h-full" style={{ aspectRatio: '4 / 5' }} />
         )}

@@ -41,3 +41,28 @@ export function orderMessage({ product, selection, productUrl }) {
 export function restockMessage({ product, productUrl }) {
   return [`Hi ${site.brandName}, is the ${product.name} coming back?`, productUrl].filter(Boolean).join('\n')
 }
+
+/** One message for the whole bag. items: [{ product, line, url }]. */
+export function cartMessage(items) {
+  const lines = [`Hi ${site.brandName}, I'd like to order these pieces:`, '']
+  let total = 0
+  let unpriced = 0
+  items.forEach(({ product, line, url }, i) => {
+    lines.push(`${i + 1}. ${product.name}`)
+    const choices = []
+    if (line.color) choices.push(`Colour: ${line.color}`)
+    if (line.size) choices.push(`Size: ${line.size}`)
+    else if (!product.sizes?.length) choices.push('Size: I’ll share my size here')
+    for (const [name, value] of Object.entries(line.options || {})) choices.push(`${name}: ${value}`)
+    if (choices.length) lines.push(`   ${choices.join(' · ')}`)
+    const price = product.priceKES != null ? `${formatPrice(product.priceKES)} each` : 'price to confirm'
+    lines.push(`   Quantity: ${line.quantity} · ${price}`)
+    if (url) lines.push(`   ${url}`)
+    lines.push('')
+    if (product.priceKES != null) total += product.priceKES * line.quantity
+    else unpriced += line.quantity
+  })
+  if (total) lines.push(`Total: ${formatPrice(total)}${unpriced ? ` plus ${unpriced} piece${unpriced === 1 ? '' : 's'} to price` : ''}`)
+  lines.push('Is everything available?')
+  return lines.join('\n')
+}

@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { navigation } from '../../config/site'
-import { InstagramLink, WhatsAppLink } from '../ContactLinks'
-import { InstagramIcon, MenuIcon, SearchIcon, WhatsAppIcon } from '../Icons'
-import { ThemeToggle } from '../ThemeToggle'
+import { WhatsAppLink } from '../ContactLinks'
+import { cartCount, shopperEnabled, useShopper } from '../../lib/shopper'
+import { BagIcon, HeartIcon, MenuIcon, SearchIcon, WhatsAppIcon } from '../Icons'
 import { Wordmark } from '../Wordmark'
 import { MobileMenu } from './MobileMenu'
 import { SearchDialog } from './SearchDialog'
@@ -19,6 +19,8 @@ export function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const location = useLocation()
+  const { wishlist, cart } = useShopper()
+  const bagCount = cartCount(cart)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
@@ -45,19 +47,22 @@ export function Header() {
           scrolled ? 'border-b border-line bg-paper/95' : 'border-b border-transparent bg-paper'
         }`}
       >
-        <div className="shell grid h-16 grid-cols-[1fr_auto_1fr] items-center lg:h-[4.5rem] lg:grid-cols-[auto_1fr_auto] lg:gap-10">
+        <div className="shell grid h-16 grid-cols-[1fr_auto_1fr] items-center lg:h-[4.5rem] lg:grid-cols-[auto_1fr_auto] lg:gap-12">
           <div className="flex items-center lg:hidden">
             <button type="button" className={`${iconButton} -ml-2.5`} aria-label="Open menu" onClick={() => setMenuOpen(true)}>
               <MenuIcon />
             </button>
+            <button type="button" className={iconButton} aria-label="Search" onClick={() => setSearchOpen(true)}>
+              <SearchIcon />
+            </button>
           </div>
 
-          <Link to="/" className="justify-self-center text-[1.375rem] lg:justify-self-start lg:text-[1.5rem]" aria-label="Snug & Co. home">
+          <Link to="/" className="inline-flex items-center justify-self-center text-[2.25rem] lg:justify-self-start lg:text-[2.75rem]" aria-label="Snug & Co. home">
             <Wordmark />
           </Link>
 
           <nav aria-label="Main" className="hidden lg:block">
-            <ul className="flex items-center gap-7 text-[0.9375rem]">
+            <ul className="flex items-center gap-8 text-[0.9375rem]">
               {navigation.map((item) => {
                 const active = isNavActive(item.to, location.pathname)
                 return (
@@ -78,14 +83,26 @@ export function Header() {
           </nav>
 
           <div className="flex items-center justify-self-end">
-            <ThemeToggle className={iconButton} />
-            <button type="button" className={`${iconButton} -mr-2.5 lg:mr-0`} aria-label="Search" onClick={() => setSearchOpen(true)}>
+            <button type="button" className={`${iconButton} hidden lg:grid`} aria-label="Search" onClick={() => setSearchOpen(true)}>
               <SearchIcon />
             </button>
-            <InstagramLink placement="header" className={`${iconButton} hidden lg:grid`} aria-label="Snug & Co. on Instagram">
-              <InstagramIcon />
-            </InstagramLink>
-            <WhatsAppLink placement="header" className="btn btn-primary ml-3 hidden min-h-10 px-4 lg:inline-flex">
+            {shopperEnabled && (
+              <>
+                <Link to="/wishlist" className={`${iconButton} relative`} aria-label={`Wishlist, ${wishlist.length} saved`}>
+                  <HeartIcon />
+                  <CountBadge count={wishlist.length} />
+                </Link>
+                <Link
+                  to="/cart"
+                  className={`${iconButton} relative -mr-2.5 lg:mr-0`}
+                  aria-label={`Bag, ${bagCount} ${bagCount === 1 ? 'item' : 'items'}`}
+                >
+                  <BagIcon />
+                  <CountBadge count={bagCount} />
+                </Link>
+              </>
+            )}
+            <WhatsAppLink placement="header" className="btn btn-primary ml-4 hidden min-h-10 px-4 lg:inline-flex">
               <WhatsAppIcon width={18} height={18} />
               WhatsApp
             </WhatsAppLink>
@@ -96,5 +113,17 @@ export function Header() {
       <MobileMenu open={menuOpen} onClose={closeMenu} />
       <SearchDialog open={searchOpen} onClose={closeSearch} />
     </>
+  )
+}
+
+function CountBadge({ count }) {
+  if (!count) return null
+  return (
+    <span
+      aria-hidden="true"
+      className="absolute right-0.5 top-0.5 grid h-[1.125rem] min-w-[1.125rem] place-items-center rounded-full bg-ink px-1 text-[0.6875rem] font-medium leading-none text-paper tabular-nums"
+    >
+      {count > 99 ? '99+' : count}
+    </span>
   )
 }
