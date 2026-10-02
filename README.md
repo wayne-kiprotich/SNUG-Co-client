@@ -23,7 +23,7 @@ npm run preview         # serve dist/ locally
 | `src/admin/` | The admin screens (sign in, products, photos, categories, collections, account). Loaded only at `/admin`. |
 | `src/data/categories.js` | Categories (Lounge sets, Tracksuits, Jackets, Sweatshirts & tops) and collections (Kenya, Matchday, His & Hers). |
 | `src/data/social.js` | Instagram gallery tiles and testimonials. |
-| `src/lib/catalog.js` | Loads the catalog from the API when `VITE_API_URL` is set, otherwise from the bundled data. |
+| `src/lib/catalog.js` | Loads each page's data (home, card-sized product list, one product) from the API when `VITE_API_URL` is set, otherwise from the bundled data. `index.html` starts the current page's request before the app loads. |
 | `src/lib/images.js` | Finds a photo by id, whether it is bundled or uploaded through the admin. |
 | `src/lib/whatsapp.js` | Builds the order message and wa.me links. |
 | `src/lib/analytics.js` | Provider-agnostic events (`whatsapp_order_clicked`, `product_viewed`, …) pushed to `window.dataLayer`. |

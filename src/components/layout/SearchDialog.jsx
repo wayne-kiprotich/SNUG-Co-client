@@ -1,6 +1,6 @@
 import { useEffect, useId, useMemo, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { useCatalog } from '../../hooks/useCatalog'
+import { useListing } from '../../hooks/useCatalog'
 import { useDialog } from '../../hooks/useDialog'
 import { EVENTS, track } from '../../lib/analytics'
 import { searchProducts } from '../../lib/catalog'
@@ -14,7 +14,7 @@ export function SearchDialog({ open, onClose }) {
   const ref = useDialog(open, onClose)
   const inputRef = useRef(null)
   const [query, setQuery] = useState('')
-  const { catalog } = useCatalog()
+  const { catalog } = useListing(open)
   const navigate = useNavigate()
   const inputId = useId()
 
@@ -72,6 +72,8 @@ export function SearchDialog({ open, onClose }) {
 
         <div className="mt-5" aria-live="polite">
           {!hasQuery && catalog && <Suggestions catalog={catalog} />}
+
+          {hasQuery && !catalog && <p className="text-sm text-stone">Loading pieces…</p>}
 
           {hasQuery && results.length > 0 && (
             <>

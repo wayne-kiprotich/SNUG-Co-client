@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useSyncExternalStore } from 'react'
 import { site } from '../config/site'
 import { registerImages } from './images'
 
@@ -12,15 +12,9 @@ export const DEFAULT_VISUALS = {
   featureImageSmall: 'kenya-cosy-jersey-1',
 }
 
-let cache = null
-
-async function fetchSettings() {
-  const res = await fetch(`${API_URL}/settings`, { headers: { Accept: 'application/json' } })
-  if (!res.ok) throw new Error(`Settings request failed (${res.status})`)
-  const data = await res.json()
-  registerImages(data.images)
-  return data
-}
+// The last settings this browser saw. Repeat visits draw the hero and announcement at once
+// instead of waiting for the API; fresh settings replace them as soon as they arrive.
+const STORED = 'snug-settings'
 
 function withDefaults(data) {
   const out = { ...data }
@@ -28,30 +22,71 @@ function withDefaults(data) {
   return out
 }
 
-export async function loadSettings() {
-  if (cache) return cache
-  cache = withDefaults(
-    API_URL
-      ? await fetchSettings().catch(() => ({}))
-      : { announcementText: site.announcement?.text || null, announcementHref: site.announcement?.href || null },
-  )
-  return cache
+function readStored() {
+  if (!API_URL) return null
+  try {
+    const data = JSON.parse(localStorage.getItem(STORED))
+    if (!data || typeof data !== 'object') return null
+    registerImages(data.images)
+    return withDefaults(data)
+  } catch {
+    return null
+  }
+}
+
+let settings = readStored()
+let request = null
+const listeners = new Set()
+
+function publish(data) {
+  settings = withDefaults(data)
+  for (const listener of listeners) listener()
+}
+
+async function fetchSettings() {
+  const res = await fetch(`${API_URL}/settings`, { headers: { Accept: 'application/json' } })
+  if (!res.ok) throw new Error(`Settings request failed (${res.status})`)
+  const data = await res.json()
+  registerImages(data.images)
+  try {
+    localStorage.setItem(STORED, JSON.stringify(data))
+  } catch {
+    // Storage blocked: the next visit waits for the API again.
+  }
+  return data
+}
+
+/** Fresh settings (once per visit). Falls back to what this browser saw last, then to the defaults. */
+export function loadSettings() {
+  request ??= API_URL
+    ? fetchSettings().then(publish, () => publish(settings || {}))
+    : Promise.resolve(publish({ announcementText: site.announcement?.text || null, announcementHref: site.announcement?.href || null }))
+  return request.then(() => settings)
+}
+
+/**
+ * Resolves once settings are known, or after `ms` at the latest. Used before the first render on a
+ * first visit, so the announcement bar doesn't push the page down a moment after it appears.
+ */
+export function settingsReady(ms) {
+  if (settings) return Promise.resolve()
+  return Promise.race([loadSettings(), new Promise((resolve) => setTimeout(resolve, ms))])
 }
 
 export function resetSettingsCache() {
-  cache = null
+  request = null
 }
 
-/** Site settings, or null while they load. */
+function subscribe(listener) {
+  listeners.add(listener)
+  return () => listeners.delete(listener)
+}
+
+/** Site settings, or null until they first load. */
 export function useSettings() {
-  const [settings, setSettings] = useState(cache)
+  const current = useSyncExternalStore(subscribe, () => settings)
   useEffect(() => {
-    if (cache) return
-    let active = true
-    loadSettings().then((s) => active && setSettings(s))
-    return () => {
-      active = false
-    }
+    loadSettings()
   }, [])
-  return settings
+  return current
 }

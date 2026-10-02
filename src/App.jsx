@@ -1,11 +1,19 @@
 import { lazy, Suspense } from 'react'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider, useParams } from 'react-router-dom'
 import { Layout } from './components/layout/Layout'
+import { ProductSkeleton } from './components/product/ProductSkeleton'
+import { ShopSkeleton } from './components/shop/ShopSkeleton'
+import { productPreview } from './lib/catalog'
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
-import Product from './pages/Product'
 import RouteError from './pages/RouteError'
-import Shop from './pages/Shop'
+
+// Home is in the main bundle (most visits start there). Every other page loads as its own
+// chunk; the shop and product pages are fetched in the background once the first page is up.
+const loadShop = () => import('./pages/Shop')
+const loadProduct = () => import('./pages/Product')
+const Shop = lazy(loadShop)
+const Product = lazy(loadProduct)
 
 const About = lazy(() => import('./pages/About'))
 const Contact = lazy(() => import('./pages/Contact'))
@@ -13,11 +21,26 @@ const Orders = lazy(() => import('./pages/Orders'))
 const Cart = lazy(() => import('./pages/Cart'))
 const Wishlist = lazy(() => import('./pages/Wishlist'))
 
-const deferred = (Page) => (
-  <Suspense fallback={<div className="min-h-[70vh]" />}>
-    <Page />
-  </Suspense>
-)
+const deferred = (Page, fallback = <div className="min-h-[70vh]" />) => <Suspense fallback={fallback}>{Page}</Suspense>
+
+function ProductFallback() {
+  const { slug } = useParams()
+  return <ProductSkeleton preview={productPreview(slug)} />
+}
+
+const shopFallback = <ShopSkeleton />
+
+if (typeof window !== 'undefined') {
+  const warm = () => {
+    loadShop()
+    loadProduct()
+  }
+  const idle = () => (window.requestIdleCallback ? requestIdleCallback(warm, { timeout: 4000 }) : setTimeout(warm, 2000))
+  if (!location.pathname.startsWith('/admin')) {
+    if (document.readyState === 'complete') idle()
+    else addEventListener('load', idle, { once: true })
+  }
+}
 
 const booting = <div className="min-h-svh" />
 
@@ -45,14 +68,14 @@ const router = createBrowserRouter([
     errorElement: <RouteError />,
     children: [
       { path: '/', element: <Home /> },
-      { path: '/shop', element: <Shop /> },
-      { path: '/shop/:category', element: <Shop /> },
-      { path: '/product/:slug', element: <Product /> },
-      { path: '/about', element: deferred(About) },
-      { path: '/contact', element: deferred(Contact) },
-      { path: '/shipping-and-orders', element: deferred(Orders) },
-      { path: '/cart', element: deferred(Cart) },
-      { path: '/wishlist', element: deferred(Wishlist) },
+      { path: '/shop', element: deferred(<Shop />, shopFallback) },
+      { path: '/shop/:category', element: deferred(<Shop />, shopFallback) },
+      { path: '/product/:slug', element: deferred(<Product />, <ProductFallback />) },
+      { path: '/about', element: deferred(<About />) },
+      { path: '/contact', element: deferred(<Contact />) },
+      { path: '/shipping-and-orders', element: deferred(<Orders />) },
+      { path: '/cart', element: deferred(<Cart />) },
+      { path: '/wishlist', element: deferred(<Wishlist />) },
       { path: '/404', element: <NotFound /> },
       { path: '*', element: <NotFound /> },
     ],

@@ -3,8 +3,9 @@ import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { CloseIcon, FilterIcon } from '../components/Icons'
 import { ProductGrid, ProductGridSkeleton } from '../components/ProductGrid'
 import { FilterDrawer } from '../components/shop/FilterDrawer'
+import { ShopToolbarSkeleton } from '../components/shop/ShopSkeleton'
 import { CatalogError, EmptyState } from '../components/States'
-import { useCatalog } from '../hooks/useCatalog'
+import { useListing } from '../hooks/useCatalog'
 import { EVENTS, track } from '../lib/analytics'
 import { filterProducts, searchProducts, sortProducts, SORT_OPTIONS } from '../lib/catalog'
 import { useSeo } from '../lib/seo'
@@ -16,7 +17,7 @@ export default function Shop() {
   const { category: categoryParam } = useParams()
   const [searchParams, setSearchParams] = useSearchParams()
   const navigate = useNavigate()
-  const { status, catalog, retry } = useCatalog()
+  const { status, catalog, retry } = useListing()
   const [filtersOpen, setFiltersOpen] = useState(false)
   const closeFilters = useCallback(() => setFiltersOpen(false), [])
 
@@ -106,6 +107,7 @@ export default function Shop() {
         {intro && <p className="mt-3 max-w-xl text-[1.0625rem] text-stone">{intro}</p>}
       </header>
 
+      {!catalog && status === 'loading' && <ShopToolbarSkeleton />}
       {catalog && (
         <>
           <div className="mt-8 hidden items-center justify-between gap-6 border-y border-line py-4 md:flex">

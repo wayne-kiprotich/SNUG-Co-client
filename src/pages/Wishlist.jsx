@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom'
 import { ProductGrid, ProductGridSkeleton } from '../components/ProductGrid'
 import { CatalogError, EmptyState, ShopperUnavailable } from '../components/States'
-import { useCatalog } from '../hooks/useCatalog'
+import { useListing } from '../hooks/useCatalog'
 import { useSeo } from '../lib/seo'
 import { loadShopper, useShopper } from '../lib/shopper'
 
 export default function Wishlist() {
   useSeo({ title: 'Wishlist', path: '/wishlist' })
-  const { status, catalog, retry } = useCatalog()
+  const { status, catalog, retry } = useListing()
   const shopper = useShopper({ force: true })
 
   const byId = new Map((catalog?.products ?? []).map((p) => [p.id, p]))

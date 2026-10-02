@@ -4,13 +4,14 @@ import { ChevronIcon } from '../components/Icons'
 import { imageSrc } from '../components/Img'
 import { OrderPanel } from '../components/product/OrderPanel'
 import { ProductGallery } from '../components/product/ProductGallery'
-import { ProductGridSkeleton, ProductRail } from '../components/ProductGrid'
+import { ProductSkeleton } from '../components/product/ProductSkeleton'
+import { ProductRail } from '../components/ProductGrid'
 import { SectionHeading } from '../components/SectionHeading'
 import { CatalogError } from '../components/States'
 import { site } from '../config/site'
-import { useCatalog } from '../hooks/useCatalog'
+import { useHome, useProduct } from '../hooks/useCatalog'
 import { EVENTS, track } from '../lib/analytics'
-import { relatedProducts } from '../lib/catalog'
+import { productPreview } from '../lib/catalog'
 import { absoluteUrl, useSeo } from '../lib/seo'
 
 const SCHEMA_AVAILABILITY = {
@@ -59,9 +60,9 @@ function productJsonLd(product, category) {
 
 export default function Product() {
   const { slug } = useParams()
-  const { status, catalog, retry } = useCatalog()
-  const product = catalog?.products.find((p) => p.slug === slug)
-  const category = product && catalog.categories.find((c) => c.slug === product.category)
+  const { status, data, retry } = useProduct(slug)
+  const product = data?.product
+  const category = data?.category
 
   useSeo(
     product
@@ -73,20 +74,13 @@ export default function Product() {
           type: 'product',
           jsonLd: productJsonLd(product, category),
         }
-      : { title: status === 'ready' ? 'Piece not found' : 'Shop', path: `/product/${slug}` },
+      : { title: status === 'missing' ? 'Piece not found' : productPreview(slug)?.name || 'Shop', path: `/product/${slug}` },
   )
 
   useEffect(() => {
     if (product) track(EVENTS.productViewed, { product: product.slug, category: product.category, price: product.priceKES })
   }, [product])
 
-  if (status === 'loading') {
-    return (
-      <div className="shell py-10">
-        <ProductGridSkeleton count={2} />
-      </div>
-    )
-  }
   if (status === 'error') {
     return (
       <div className="shell py-10">
@@ -94,9 +88,10 @@ export default function Product() {
       </div>
     )
   }
-  if (!product) return <MissingProduct catalog={catalog} />
+  if (status === 'missing') return <MissingProduct />
+  if (!product) return <ProductSkeleton preview={productPreview(slug)} />
 
-  const related = relatedProducts(catalog, product)
+  const related = data.related
 
   return (
     <>
@@ -110,7 +105,7 @@ export default function Product() {
             <nav aria-label="Breadcrumb" className="text-sm text-stone">
               <ol className="flex flex-wrap items-center gap-x-2">
                 <li>
-                  <Link to="/shop" className="hover:text-ink hover:underline">
+                  <Link to="/shop" className="tap hover:text-ink hover:underline">
                     Shop
                   </Link>
                 </li>
@@ -118,7 +113,7 @@ export default function Product() {
                   <>
                     <li aria-hidden="true">/</li>
                     <li>
-                      <Link to={`/shop/${category.slug}`} className="hover:text-ink hover:underline">
+                      <Link to={`/shop/${category.slug}`} className="tap hover:text-ink hover:underline">
                         {category.name}
                       </Link>
                     </li>
@@ -195,8 +190,8 @@ function ProductDetails({ product }) {
   )
 }
 
-function MissingProduct({ catalog }) {
-  const suggestions = catalog.products.filter((p) => p.newArrival).slice(0, 4)
+function MissingProduct() {
+  const suggestions = useHome().data?.newArrivals ?? []
   return (
     <div className="shell pb-24 pt-14 lg:pt-20">
       <h1 className="type-h1 max-w-2xl">This piece is no longer available.</h1>

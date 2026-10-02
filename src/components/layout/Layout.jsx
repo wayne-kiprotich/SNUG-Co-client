@@ -26,7 +26,7 @@ export function Layout() {
       </a>
       <AnnouncementBar />
       <Header />
-      <main id="main" tabIndex={-1} className="outline-none">
+      <main id="main" tabIndex={-1} className="min-h-svh outline-none">
         <Outlet />
       </main>
       <Footer />

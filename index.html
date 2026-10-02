@@ -26,17 +26,33 @@
     <meta name="google-site-verification" content="%VITE_GOOGLE_SITE_VERIFICATION%" />
     <meta name="twitter:card" content="summary_large_image" />
     <script>
-      // Fetch shop data early (not needed on admin).
-      if (!location.pathname.startsWith('/admin')) {
-        ;['/api/catalog', '/api/settings'].forEach(function (href) {
+      // Start this page's own data (and, on a repeat visit, the hero photo) while the app downloads.
+      // Keep the URLs in step with src/lib/catalog.js. Not needed on admin.
+      ;(function () {
+        var api = '%VITE_API_URL%'.replace(/\/$/, '')
+        var path = location.pathname.replace(/\/$/, '') || '/'
+        if (!/^(\/|https?:)/.test(api) || path.indexOf('/admin') === 0) return
+        function preload(attrs) {
           var link = document.createElement('link')
           link.rel = 'preload'
-          link.as = 'fetch'
-          link.crossOrigin = 'anonymous'
-          link.href = href
+          for (var key in attrs) link.setAttribute(key, attrs[key])
           document.head.appendChild(link)
+        }
+        var urls = [api + '/settings']
+        var product = path.match(/^\/product\/([^/]+)$/)
+        if (path === '/') urls.push(api + '/home')
+        else if (product) urls.push(api + '/products/' + product[1])
+        else if (/^\/(shop|cart|wishlist)(\/|$)/.test(path)) urls.push(api + '/products')
+        urls.forEach(function (href) {
+          preload({ as: 'fetch', crossorigin: 'anonymous', href: href })
         })
-      }
+        if (path === '/') {
+          try {
+            var hero = JSON.parse(localStorage.getItem('snug-hero'))
+            if (hero) preload({ as: 'image', href: hero.src, imagesrcset: hero.srcset, imagesizes: hero.sizes, fetchpriority: 'high' })
+          } catch (e) {}
+        }
+      })()
     </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" href="/favicon.png" />

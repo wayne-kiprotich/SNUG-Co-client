@@ -18,7 +18,9 @@ export function Img({
   ratio = '4 / 5',
 }) {
   const image = getImage(id)
-  const [failed, setFailed] = useState(false)
+  // Remembered per photo, so a newer photo in the same spot (fresh site settings) gets its chance.
+  const [failedId, setFailedId] = useState(null)
+  const failed = failedId === id
   // Lazy images fade in.
   const [loaded, setLoaded] = useState(priority || eager)
 
@@ -37,7 +39,7 @@ export function Img({
           decoding="async"
           ref={(el) => el?.complete && el.naturalWidth && setLoaded(true)}
           onLoad={() => setLoaded(true)}
-          onError={() => setFailed(true)}
+          onError={() => setFailedId(id)}
           className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-200 ${loaded ? 'opacity-100' : 'opacity-0'} ${imgClassName}`}
         />
       ) : (
