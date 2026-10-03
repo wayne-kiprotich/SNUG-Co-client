@@ -8,7 +8,7 @@ export function HisAndHers({ pieces }) {
       <div className="shell">
         <h2
           id="his-hers-title"
-          className="flex items-baseline justify-between text-[2.75rem] font-medium leading-[0.85] tracking-[-0.04em] sm:text-[clamp(4rem,2rem+13vw,13rem)] lg:justify-start lg:gap-[0.12em]"
+          className="flex items-baseline gap-[0.2em] text-[2.75rem] font-medium leading-[0.85] tracking-[-0.04em] sm:text-[clamp(4rem,2rem+13vw,13rem)] lg:gap-[0.12em]"
           style={{ fontStretch: '120%' }}
         >
           <span>His</span>
