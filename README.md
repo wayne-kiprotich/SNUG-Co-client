@@ -23,9 +23,11 @@ npm run preview         # serve dist/ locally
 | `src/admin/` | The admin screens (sign in, products, photos, categories, collections, account). Loaded only at `/admin`. |
 | `src/data/categories.js` | Categories (Lounge sets, Tracksuits, Jackets, Sweatshirts & tops) and collections (Kenya, Matchday, His & Hers). |
 | `src/data/social.js` | Instagram gallery tiles and testimonials. |
-| `src/lib/catalog.js` | Loads each page's data (home, card-sized product list, one product) from the API when `VITE_API_URL` is set, otherwise from the bundled data. `index.html` starts the current page's request before the app loads. |
+| `src/lib/catalog.js` | Loads each page's data (home, card-sized product list, one product) from the API when `VITE_API_URL` is set, otherwise from the bundled data. `index.html` starts the current page's request before the app loads. Each response is also kept in the browser for a week (`snug-cache:v1:*`), so a returning visitor sees the last copy at once while fresh data loads. |
 | `src/lib/images.js` | Finds a photo by id, whether it is bundled or uploaded through the admin. |
-| `src/lib/whatsapp.js` | Builds the order message and wa.me links. |
+| `src/lib/whatsapp.js` | Builds the order message and wa.me links. `openWhatsApp` opens WhatsApp only after the order has been checked. |
+| `src/lib/order.js` | Compares an order as shown with the server's current prices and availability (`npm test`). |
+| `src/lib/shopper.js` | Wishlist and bag (kept by the API in a cookie), plus `checkOrder`, which asks the server for current prices right before an order is sent. |
 | `src/lib/analytics.js` | Provider-agnostic events (`whatsapp_order_clicked`, `product_viewed`, …) pushed to `window.dataLayer`. |
 | `src/lib/seo.js` | Per-page title, description, canonical, Open Graph and JSON-LD. |
 
@@ -63,4 +65,16 @@ Two ways to host this, depending on where the Flask API (`../server`) runs:
 
 Either way, set `VITE_SITE_URL` so canonical and share links use the real domain.
 
+A Vercel production build (`VERCEL_ENV=production`) stops with a clear error unless these are set. Other builds only warn.
+
+- `VITE_API_URL` set to `/api`, or the shop shows the bundled sample catalog.
+- `VITE_WHATSAPP_NUMBER` in international format without the leading 0, or orders have no recipient.
+- `VITE_SITE_URL` as the live `https://` address with no trailing slash. The build puts it in the share-preview image URL in `index.html` and the `Sitemap:` line of the generated `robots.txt`.
+
+`/sitemap.xml` is proxied to the API, which lists every published product. Set `SITE_URL` on Render to the same address, or the sitemap lists the Render host instead.
+
 Share previews on WhatsApp and Facebook read the static tags in `index.html`, because those crawlers don't run JavaScript. If you need a separate preview for each product, prerender those pages at build time. That is a later enhancement.
+
+Deploy the server before this site whenever both change: orders are checked against `/api/shopper/check`, which older servers don't have.
+
+The build adds a Content-Security-Policy `<meta>` tag to `index.html` (see `vite.config.js`). It allows the site's own files and `/api`, Google Fonts and `res.cloudinary.com` photos, and the two inline scripts in `index.html` by hash. Loading anything from another domain (an analytics script, photos from another host) means adding that domain there first. Vercel's preview toolbar is blocked by it on preview deployments.

@@ -5,6 +5,10 @@
       "destination": "https://snug-co-api.onrender.com/api/:path*"
     },
     {
+      "source": "/sitemap.xml",
+      "destination": "https://snug-co-api.onrender.com/sitemap.xml"
+    },
+    {
       "source": "/((?!api/|images/|assets/|.*\\..*).*)",
       "destination": "/index.html"
     }
