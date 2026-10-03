@@ -8,8 +8,8 @@ export function HisAndHers({ pieces }) {
       <div className="shell">
         <h2
           id="his-hers-title"
-          className="flex items-baseline justify-between font-medium leading-[0.85] tracking-[-0.04em] lg:justify-start lg:gap-[0.12em]"
-          style={{ fontStretch: '120%', fontSize: 'clamp(4rem, 2rem + 13vw, 13rem)' }}
+          className="flex items-baseline justify-between text-[2.75rem] font-medium leading-[0.85] tracking-[-0.04em] sm:text-[clamp(4rem,2rem+13vw,13rem)] lg:justify-start lg:gap-[0.12em]"
+          style={{ fontStretch: '120%' }}
         >
           <span>His</span>
           <span className="amp" aria-hidden="true" style={{ fontSize: '1.08em' }}>
