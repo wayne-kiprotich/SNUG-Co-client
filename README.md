@@ -63,4 +63,12 @@ Two ways to host this, depending on where the Flask API (`../server`) runs:
 
 Either way, set `VITE_SITE_URL` so canonical and share links use the real domain.
 
+A Vercel production build (`VERCEL_ENV=production`) stops with a clear error unless these are set. Other builds only warn.
+
+- `VITE_API_URL` set to `/api`, or the shop shows the bundled sample catalog.
+- `VITE_WHATSAPP_NUMBER` in international format without the leading 0, or orders have no recipient.
+- `VITE_SITE_URL` as the live `https://` address with no trailing slash. The build puts it in the share-preview image URL in `index.html` and the `Sitemap:` line of the generated `robots.txt`.
+
+`/sitemap.xml` is proxied to the API, which lists every published product. Set `SITE_URL` on Render to the same address, or the sitemap lists the Render host instead.
+
 Share previews on WhatsApp and Facebook read the static tags in `index.html`, because those crawlers don't run JavaScript. If you need a separate preview for each product, prerender those pages at build time. That is a later enhancement.
