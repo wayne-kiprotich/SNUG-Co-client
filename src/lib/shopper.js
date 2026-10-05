@@ -1,6 +1,6 @@
 import { useEffect, useSyncExternalStore } from 'react'
 import { CHECKOUT_DEADLINE, CHECKOUT_TIMED_OUT, CHECKOUT_TIMEOUT, fetchText, FetchError, within } from './http'
-import { FRESH_FOR, shouldRefreshOnReturn } from './shopperSync'
+import { CHANGE_SIGNAL, FRESH_FOR, isChangeSignal, shouldReadServer, shouldRefreshOnReturn } from './shopperSync'
 
 // Wishlist and cart live in a signed, HttpOnly cookie set by the API (/api/shopper).
 // This module mirrors them in memory so every component sees the same counts.
@@ -8,11 +8,8 @@ const API_URL = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '')
 
 export const shopperEnabled = Boolean(API_URL)
 
-// Set once this browser has saved something, so first-time visitors skip the request.
-const HINT = 'snug-shopper'
-// Written after every change. Other tabs of this site get a storage event and ask the server again.
-// It carries no shopper data: the bag itself stays in the cookie.
-const CHANGED = 'snug-shopper-changed'
+// Written after every change, as a signal only (see shopperSync.js).
+const CHANGED = CHANGE_SIGNAL
 
 export class ShopperError extends Error {
   constructor(message, fields, { timedOut = false } = {}) {
@@ -44,23 +41,6 @@ function publish(next) {
     error: next.error ?? null,
   }
   for (const listener of listeners) listener()
-}
-
-function hasSaved() {
-  try {
-    return localStorage.getItem(HINT) === '1'
-  } catch {
-    return true
-  }
-}
-
-function rememberSaved(data) {
-  try {
-    if (data.wishlist.length || data.cart.length) localStorage.setItem(HINT, '1')
-    else localStorage.removeItem(HINT)
-  } catch {
-    // Storage blocked: the next visit just asks the API.
-  }
 }
 
 function announceChange() {
@@ -104,7 +84,6 @@ async function send(path = '', { method = 'GET', json, timeout, retries } = {}) 
       : data?.error || 'Something went wrong. Try again.'
     throw new ShopperError(message, data?.fields)
   }
-  rememberSaved(data)
   if (method !== 'GET') announceChange()
   loadedAt = Date.now()
   publish(data)
@@ -138,12 +117,11 @@ let loading = null
 
 /** Load the wishlist and cart. force: ask the API even if this browser saved nothing. */
 export function loadShopper({ force = false } = {}) {
-  const recent = Date.now() - loadedAt < FRESH_FOR
-  if (!shopperEnabled || (state.ready && !state.error && (!force || recent))) return Promise.resolve(state)
-  if (!force && !state.error && !hasSaved()) {
-    publish({ wishlist: [], cart: [] })
+  const loadedRecently = Date.now() - loadedAt < FRESH_FOR
+  if (!shouldReadServer({ enabled: shopperEnabled, ready: state.ready, error: state.error, force, loadedRecently })) {
     return Promise.resolve(state)
   }
+  // One read in flight at a time: every component asking at once shares it.
   loading ??= request()
     .catch((err) => publish({ wishlist: state.wishlist, cart: state.cart, error: err.message }))
     .finally(() => {
@@ -243,14 +221,14 @@ export function startShopperSync() {
       loadedAt,
       ready: state.ready,
       error: state.error,
-      hasItems: hasSaved() || state.wishlist.length > 0 || state.cart.length > 0,
+      hasItems: state.wishlist.length > 0 || state.cart.length > 0,
     })
     if (due) loadShopper({ force: true })
   }
   window.addEventListener('focus', onReturn)
   document.addEventListener('visibilitychange', onReturn)
   window.addEventListener('storage', (event) => {
-    if (event.key === CHANGED) resync()
+    if (isChangeSignal(event.key)) resync()
   })
 }
 
